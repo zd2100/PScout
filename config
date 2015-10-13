@@ -1,0 +1,21 @@
+{
+	/* SQL SERVER */
+	driverClass: "com.microsoft.sqlserver.jdbc.SQLServerDriver",
+	connectionString: "jdbc:sqlserver://localhost;databaseName=PScout;user=pscoutclient;password=PScout;",
+	
+	/* MySQL */
+//	driverClass: "com.mysql.jdbc.Driver",
+//	connectionString: "jdbc:mysql://localhost/pscout?user=pscoutclient&password=PScout",
+	
+	
+	parallelJobs : 10,
+	androidVersion: "4.4.1",
+	
+	androidSourcePath: "",
+	jarFilePath: "D:\\Jars",
+	classDumpPath : "D:\\ClassDump",
+	
+	extractJarCommands: ["cmd.exe", "/c" ],
+	extractJarBash: "tools\\extractJar.bat"
+
+}
