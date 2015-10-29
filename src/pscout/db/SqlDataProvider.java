@@ -221,7 +221,7 @@ public class SqlDataProvider implements DbProvider {
 		if(includeSelf) list.add(origin);
 		queue.add(origin);
 		
-		while(!queue.isEmpty()){
+		while(!queue.isEmpty()){ 
 			Class current = queue.removeFirst();
 			
 			

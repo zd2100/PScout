@@ -12,97 +12,76 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
-import pscout.analyzer.AsmClassAnalyzer;
-import pscout.analyzer.TestAnalyzer;
+import pscout.asm.AsmClassAnalyzer;
+import pscout.asm.AsmPermissionAnalyzer;
 import pscout.db.DbProvider;
 import pscout.models.Class;
 import pscout.models.Configuration;
 import pscout.models.Method;
 import pscout.models.MethodInvocation;
+import pscout.models.SearchScope;
+import pscout.models.SearchTarget;
 import pscout.util.BashRunner;
 
 public class PScout {	
 
 	private final Factory factory;
-	private final Configuration config;
-	private final SimpleDateFormat timeFormat;
-	private final DbProvider dbProvider;
-	
 	public PScout(){
 		this.factory = Factory.instance();
-		this.config = this.factory.getConfiguration();
-		this.timeFormat = new SimpleDateFormat("HH:mm:ss");
-		this.dbProvider = this.factory.getDbProvider();
 	}
 	
 	public void shutdown(){
+		// close all connections
 		this.factory.shutdown();
 	}
 	
-	
-	public void extractJars(){
-		if(this.config != null){
-			System.out.println("Extracting *.jar files, please wait...");
+	/* ---------------- Step 1: Extract Jar Files --------------------- */
+	public void extractJars() throws Exception {
+		Configuration config = this.factory.getConfiguration();
+		if(config != null){
+			System.out.println(Statistics.getTime() + " ========= Extracting *.jar files =========");
 			
+			// Execute bash file with format: ./bash jars output
 			List<String> commands = new ArrayList<String>();
-			commands.addAll(Arrays.asList(this.config.extractJarCommands));
-			commands.add(String.format("%s %s %s", this.config.extractJarBash, this.config.jarFilePath, this.config.classDumpPath));
-			BashRunner  bash = new BashRunner(commands);
+			commands.addAll(Arrays.asList(config.extractJarCommands));
+			commands.add(String.format("%s %s %s",config.extractJarBash, config.jarFilePath, config.classDumpPath));
+			BashRunner  bash = new BashRunner(commands, false);
 			bash.run();
-			System.out.println("Extraction Completed!");
+			
+			System.out.println(Statistics.getTime() + " ========= Extraction Completed! =========");
 			System.out.println();
 		}
 	}
 	
 	
-	/*------------------- Scan Classes for hierarchy ----------------------*/
-	public void analyzeClasses() throws Exception{
+	/* ---------------- Step 2: Parse Class Hierarchy and Call Graph ---------------- */
+	public void analyzeClasses() throws Exception {
+		Configuration config = this.factory.getConfiguration();
 		if(config != null){
-			
-			System.out.println("========= Starting Level 1 Analysis... " + " ==========");
-			long time = System.currentTimeMillis();
+			System.out.println(Statistics.getTime() + " ========= Parsing Class Hierarchy and Call Graph =========");
 			
 			// clear out existing classes and methods for current android version
-			this.factory.getDbProvider().deleteVersion(this.config.androidVersion);
+			this.factory.getDbProvider().deleteVersion(config.androidVersion);
+			File classDirectory = new File(config.classDumpPath);
 			
-			File classDirectory = new File(this.config.classDumpPath);
 			// class dump directory not exist
-			if(!classDirectory.exists() || !classDirectory.isDirectory()){
+			if(!classDirectory.exists() || !classDirectory.isDirectory())
 				throw new Exception("Class Dump directory not exist!");
-			}
 			
 			// Parallel execution
-			ExecutorService threadPool = Executors.newFixedThreadPool(this.config.parallelJobs);
-			
-			Timer timer = new Timer();
-			timer.scheduleAtFixedRate(new TimerTask(){
-				@Override
-				public void run() {
-					System.out.println("Class: " + Statistics.classCount.get() + "\t Methods: " + 
-							Statistics.methodCount.get() + "\t Invocations: " + Statistics.methodInvocationCount.get());
-				}
-				
-			}, 1000,1000);
-			
-			// start scanning classes
+			ExecutorService threadPool = Executors.newFixedThreadPool(config.parallelJobs);
 			this.analyzeClassesRecursive(classDirectory, threadPool);
-			
-			System.out.println("Task submitted, prepare to shutdown");
-			// shutdown and wait for all thread to complete in 1 minute
+
+			// shutdown and wait for all thread to complete in 5 minutes
 			threadPool.shutdown();
-			threadPool.awaitTermination(10l,TimeUnit.MINUTES);
-			
-			
-			System.out.println("Analyzed " + Statistics.classCount.get() + " classes, " + Statistics.methodCount.get() + 
-					" methods and " + Statistics.methodInvocationCount.get() + " invocations");
-			
-			System.out.println("========== Level 1 Analysis Completed! ============");
-			System.out.println("Analyze Time: " + ((System.currentTimeMillis() - time) / 1000) + " seconds");
-			
-			timer.cancel();
+			threadPool.awaitTermination(5l,TimeUnit.MINUTES);
+
+			System.out.println(Statistics.getTime() + " ========= Class Hierarchy and Call Graph Ready! =========");
+			System.out.println();
 		}
 	}
 	
+	// Recursively search sub-directory and analyze class files
 	private void analyzeClassesRecursive(File directory, ExecutorService threadPool){
 		if(directory.exists() && directory.isDirectory()){
 			// Loop through each file and directory
@@ -111,9 +90,8 @@ public class PScout {
 				if(fileOrDirectory.isDirectory()){
 					analyzeClassesRecursive(fileOrDirectory, threadPool);
 				}else{
-					if(fileOrDirectory.getName().endsWith(".class")){
+					if(fileOrDirectory.getName().endsWith(".class")) 
 						threadPool.submit(new AsmClassAnalyzer(fileOrDirectory));
-					}
 				}
 			} 
 			// End of for loop
@@ -121,8 +99,22 @@ public class PScout {
 	}
 	
 	
-	
-	
+	/* ---------------- Step 3: Search for permission invocations ---------------- */
+	private void deepScan() throws Exception {
+		DbProvider provider = this.factory.getDbProvider();
+		
+		SearchTarget target = new SearchTarget("android/content/Context", "checkCallingOrSelfPermission", "(Ljava/lang/String;)I", 1);
+		List<MethodInvocation> invocationList = provider.findAllInvocations(target.clsName, target.methodName, target.methodDesc, "4.4.1");
+		
+		for(MethodInvocation invocation : invocationList){
+			System.out.println("--------------- " + invocation.callingClass + " " + invocation.callingMethod + " ------------------");
+			SearchScope scope = new SearchScope(invocation.callingClass, invocation.callingMethod, invocation.callingMethodDescriptor);
+			AsmPermissionAnalyzer analyzer = new AsmPermissionAnalyzer(scope, target);
+			analyzer.run();
+			System.out.println("---------------------------------------------------------------------------------------------------");
+			System.out.println();
+		}
+	}
 	
 	
 	private static void showUsage(){
@@ -130,6 +122,7 @@ public class PScout {
 	}
 
 	public static void main(String[] args) {
+		// display usage information
 		if(args == null || args.length == 0){
 			showUsage();
 		}
@@ -138,25 +131,11 @@ public class PScout {
 		try{
 		//	pscout.extractJars();
 		//	pscout.analyzeClasses();
-			/*
-			long time = System.currentTimeMillis();
-			int level = pscout.dbProvider.findAllInvocationsRecursive("android/content/Context", "checkPermission", "(Ljava/lang/String;II)I", "4.4.1");
-			
-			for(MethodInvocation method : methods){
-				System.out.println(method.callingClass + "\t" + method.callingMethod + "\t" + method.callingMethodDescriptor + "\t" + method.invokeType);
-			}
-			
-			System.out.println("Total: " + level + " levels");	
-			System.out.println("Time: " + (System.currentTimeMillis() - time) + " millis");
-			*/
-			
-			
-			TestAnalyzer analyzer = new TestAnalyzer();
-			analyzer.run();
-			
+			pscout.deepScan();
 		}catch(Exception e){
 			e.printStackTrace();
 		}finally{
+			// safe shutdown
 			pscout.shutdown();
 		}
 	}

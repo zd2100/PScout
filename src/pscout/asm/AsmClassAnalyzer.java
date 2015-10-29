@@ -1,4 +1,4 @@
-package pscout.analyzer;
+package pscout.asm;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -13,12 +13,11 @@ import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
 
 import pscout.Factory;
+import pscout.asm.AsmOpCodes.AccessTypes;
 import pscout.db.DbProvider;
 import pscout.models.Class;
 import pscout.models.Configuration;
 import pscout.models.Method;
-import pscout.util.AsmOpCodeUtility;
-import pscout.util.AsmOpCodeUtility.AccessTypes;
 import pscout.util.StringJoiner;
 
 public class AsmClassAnalyzer implements Runnable {

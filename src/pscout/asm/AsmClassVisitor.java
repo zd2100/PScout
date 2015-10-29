@@ -1,4 +1,4 @@
-package pscout.analyzer;
+package pscout.asm;
 
 import java.util.Arrays;
 
@@ -8,13 +8,12 @@ import org.objectweb.asm.Opcodes;
 
 import pscout.Factory;
 import pscout.Statistics;
+import pscout.asm.AsmOpCodes.AccessTypes;
 import pscout.db.DbProvider;
 import pscout.models.Class;
 import pscout.models.Configuration;
 import pscout.models.Method;
-import pscout.util.AsmOpCodeUtility;
 import pscout.util.StringJoiner;
-import pscout.util.AsmOpCodeUtility.AccessTypes;
 
 public class AsmClassVisitor extends ClassVisitor{
 	private final Configuration config;
@@ -34,13 +33,13 @@ public class AsmClassVisitor extends ClassVisitor{
 		Statistics.classCount.incrementAndGet();
 
 		this.cls.className = name;
-		this.cls.access = StringJoiner.join(AsmOpCodeUtility.buildAccessList(access, AccessTypes.Class), ";");
+		this.cls.access = StringJoiner.join(AsmOpCodes.buildAccessList(access, AccessTypes.Class), ";");
 		this.cls.version = this.config.androidVersion;
 		this.cls.superClass = superName;
 		this.cls.signature = signature;
-		this.cls.isAbstract = AsmOpCodeUtility.isAbstract(access);
-		this.cls.isEnum = AsmOpCodeUtility.isEnum(access);
-		this.cls.isInterface = AsmOpCodeUtility.isInterface(access);
+		this.cls.isAbstract = AsmOpCodes.isAbstract(access);
+		this.cls.isEnum = AsmOpCodes.isEnum(access);
+		this.cls.isInterface = AsmOpCodes.isInterface(access);
 		if(interfaces != null) cls.interfaces.addAll(Arrays.asList(interfaces));
 		
 		// insert into database
@@ -60,13 +59,13 @@ public class AsmClassVisitor extends ClassVisitor{
 		Method method = new Method();
 		method.className = this.cls.className;
 		method.methodName = name;
-		method.access = access + ";" + StringJoiner.join(AsmOpCodeUtility.buildAccessList(access, AccessTypes.Method), ";");
+		method.access = access + ";" + StringJoiner.join(AsmOpCodes.buildAccessList(access, AccessTypes.Method), ";");
 		method.version = this.config.androidVersion;
 		method.signature = signature;
 		method.descriptor = desc;
 		if(exceptions != null) method.exceptions.addAll(Arrays.asList(exceptions));
-		method.isAbstract = AsmOpCodeUtility.isAbstract(access);
-		method.isNative = AsmOpCodeUtility.isNative(access);
+		method.isAbstract = AsmOpCodes.isAbstract(access);
+		method.isNative = AsmOpCodes.isNative(access);
 
 		// insert into database
 		try{

@@ -44,6 +44,7 @@ public class Factory {
 	public synchronized DbProvider getDbProvider(){
 		if(this.dbProvider == null){
 			try{
+				getConfiguration();
 				this.dbProvider = new SqlDataProvider(this.config.driverClass, this.config.connectionString, this.config.parallelJobs);
 			}catch(Exception e){
 				e.printStackTrace();

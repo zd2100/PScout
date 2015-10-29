@@ -1,4 +1,4 @@
-package pscout.analyzer;
+package pscout.asm;
 
 import org.objectweb.asm.Handle;
 import org.objectweb.asm.Label;
@@ -12,7 +12,6 @@ import pscout.models.Class;
 import pscout.models.Configuration;
 import pscout.models.Method;
 import pscout.models.MethodInvocation;
-import pscout.util.AsmOpCodeUtility;
 
 public class AsmMethodVisitor extends MethodVisitor{
 	private final Configuration config;
@@ -36,7 +35,7 @@ public class AsmMethodVisitor extends MethodVisitor{
 		Statistics.methodInvocationCount.incrementAndGet();
 		
 		MethodInvocation invocation = new MethodInvocation();
-		invocation.invokeType = AsmOpCodeUtility.MapInvokeType(opcode);
+		invocation.invokeType = AsmOpCodes.MapInvokeType(opcode);
 		invocation.callingClass = this.method.className;
 		invocation.callingMethod = this.method.methodName;
 		invocation.callingMethodDescriptor = this.method.descriptor;

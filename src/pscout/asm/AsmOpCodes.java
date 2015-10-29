@@ -1,11 +1,11 @@
-package pscout.util;
+package pscout.asm;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import org.objectweb.asm.Opcodes;
 
-public class AsmOpCodeUtility {
+public class AsmOpCodes {
 	private static int bitMask = 0x1;
 	public static enum AccessTypes{
 		Class,

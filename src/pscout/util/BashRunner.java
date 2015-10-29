@@ -5,9 +5,11 @@ import java.util.List;
 
 public class BashRunner implements Runnable {
 	private final List<String> bashCommands;
+	private final boolean async;
 	
-	public BashRunner(List<String> bashCommands){
+	public BashRunner(List<String> bashCommands, boolean async){
 		this.bashCommands = bashCommands;
+		this.async = async;
 	}
 	
 	public void run(){
@@ -16,8 +18,8 @@ public class BashRunner implements Runnable {
 			builder.redirectOutput(Redirect.INHERIT);
 			builder.redirectError(Redirect.INHERIT);
 			Process process = builder.start();
-			process.waitFor();
-			
+			// wait for thread if not asynchronous
+			if(!async) process.waitFor();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
