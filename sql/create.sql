@@ -1,155 +1,153 @@
-IF OBJECT_ID('Classes') IS NOT NULL
-	DROP TABLE Classes;
-GO
+SET FOREIGN_KEY_CHECKS=0; 
+DROP Table IF EXISTS Classes;
+SET FOREIGN_KEY_CHECKS=1;
 
 CREATE TABLE Classes
 (
-ID int Identity(1,1) PRIMARY KEY,
-ClassName varchar(256) NOT NULL,
-Version varchar(16) NOT NULL,
-Access varchar(64),
-SuperClass varchar(256),
-Signature varchar(900),
-Interfaces varchar(900),
+ID int auto_increment PRIMARY KEY,
+ClassName varchar(255) NOT NULL,
+Version varchar(15) NOT NULL,
+Access varchar(63),
+SuperClass varchar(255),
+Signature text,
+Interfaces text,
 IsAbstract bit,
 IsInterface bit,
-IsEnum bit,
--- CONSTRAINT PK_Class PRIMARY KEY CLUSTERED (ClassName, Version)
-)
-GO
+IsEnum bit
+);
 
 CREATE UNIQUE INDEX IDX_Classes_ClassName_Version
-ON Classes (ClassName, Version)
+ON Classes (ClassName, Version);
 
 CREATE INDEX IDX_Classes_ClassName
-ON Classes (ClassName)
+ON Classes (ClassName);
 
 CREATE INDEX IDX_Classes_Version
-ON Classes (Version)
+ON Classes (Version);
 
 CREATE INDEX IDX_Classes_SuperClass
-ON Classes (SuperClass)
+ON Classes (SuperClass);
 
 CREATE INDEX IDX_Classes_Signature
-ON Classes (Signature)
+ON Classes (Signature(255));
 
 CREATE INDEX IDX_Classes_Interfaces
-ON Classes (Interfaces)
+ON Classes (Interfaces(255));
 
 CREATE INDEX IDX_Classes_IsInterface
-ON Classes (IsInterface)
+ON Classes (IsInterface);
 
 
 
 
 
-
-
-
-IF OBJECT_ID('Methods') IS NOT NULL
-	DROP TABLE Methods;
-GO
-
+SET FOREIGN_KEY_CHECKS=0; 
+DROP TABLE IF EXISTS Methods;
+SET FOREIGN_KEY_CHECKS=1;
 
 CREATE TABLE Methods
 (
-ID int identity(1,1) PRIMARY KEY,
-ClassName varchar(256) NOT NULL,
-MethodName varchar(128) NOT NULL,
-Version varchar(16) NOT NULL,
-Access varchar(64),
-Signature varchar(900),
-Descriptor varchar(max) NOT NULL,
-Exceptions varchar(900),
+ID int auto_increment PRIMARY KEY,
+ClassId int NOT NULL,
+MethodName varchar(127) NOT NULL,
+Version varchar(15) NOT NULL,
+Access varchar(63),
+Signature text,
+Descriptor text NOT NULL,
+Exceptions text,
 IsAbstract bit,
 IsNative bit,
--- CONSTRAINT PK_Method PRIMARY KEY CLUSTERED (ClassName, MethodName, Version)
-)
-GO
-
-CREATE INDEX IDX_Methods_ClassName
-ON Methods (ClassName)
+FOREIGN KEY (ClassId) REFERENCES Classes(ID) ON DELETE CASCADE
+);
 
 CREATE INDEX IDX_Methods_MethodName
-ON Methods (MethodName)
+ON Methods (MethodName);
 
 CREATE INDEX IDX_Methods_Version
-ON Methods (Version)
+ON Methods (Version);
 
 CREATE INDEX IDX_Methods_Signature
-ON Methods (Signature)
+ON Methods (Signature(255));
 
 CREATE INDEX IDX_Methods_Exceptions
-ON Methods (Exceptions)
+ON Methods (Exceptions(255));
+
+CREATE INDEX IDX_Methods_Descriptor
+ON Methods (Descriptor(255));
 
 CREATE INDEX IDX_METHODS_IsAbstract
-ON Methods (IsAbstract)
+ON Methods (IsAbstract);
 
 CREATE INDEX IDX_Methods_IsNative
-ON Methods (IsNative)
+ON Methods (IsNative);
 
 
 
 
 
 
-IF OBJECT_ID('MethodInvocations') IS NOT NULL
-	DROP TABLE MethodInvocations
-GO
+SET FOREIGN_KEY_CHECKS=0; 
+DROP TABLE IF EXISTS Invocations;
+SET FOREIGN_KEY_CHECKS=1;
 
-CREATE TABLE MethodInvocations
+CREATE TABLE Invocations
 (
-ID int IDENTITY(1,1) PRIMARY KEY,
-InvokeType varchar(16) NOT NULL,
-CallingClass varchar(256) NOT NULL,
-CallingMethod varchar(128) NOT NULL,
-CallingMethodDescriptor varchar(max) NOT NULL,
-TargetClass varchar(256) NOT NULL,
-TargetMethod varchar(128) NOT NULL,
-TargetMethodDescriptor varchar(max) NOT NULL,
-Version varchar(16) NOT NULL
---CONSTRAINT PK_MethodInvocations PRIMARY KEY CLUSTERED (CallingClass, CallingMethod, TargetClass,TargetMethod, Version)
-)
-GO
+ID int auto_increment PRIMARY KEY,
+InvokeType varchar(15) NOT NULL,
+CallerClass varchar(255) NOT NULL,
+CallerMethod varchar(127) NOT NULL,
+CallerMethodDesc text NOT NULL,
+TargetClass varchar(255) NOT NULL,
+TargetMethod varchar(127) NOT NULL,
+TargetMethodDesc text NOT NULL,
+Version varchar(15) NOT NULL
+);
 
-CREATE INDEX IDX_MethodInvocations_CallingClass
-ON MethodInvocations (CallingClass)
+CREATE INDEX IDX_Invocations_Version
+ON Invocations (Version);
 
-CREATE INDEX IDX_MethodInvocations_CallingMethod
-ON MethodInvocations (CallingMethod)
+CREATE INDEX IDX_Invocations_InvokeType
+ON Invocations (InvokeType);
 
-CREATE INDEX IDX_MethodInvocations_TargetClass
-ON MethodInvocations (TargetClass)
+CREATE INDEX IDX_Invocations_CallerClass
+ON Invocations (CallerClass);
 
-CREATE INDEX IDX_MethodInvocations_TargetMethod
-ON MethodInvocations (TargetMethod)
+CREATE INDEX IDX_Invocations_TargetClass
+ON Invocations (TargetClass);
 
-CREATE INDEX IDX_MethodInvocations_InvokeType
-ON MethodInvocations (InvokeType)
+CREATE INDEX IDX_Invocations_CallerMethod
+ON Invocations (CallerMethod);
+
+CREATE INDEX IDX_Invocations_TargetMethod
+ON Invocations (TargetMethod);
+
+CREATE INDEX IDX_Invocations_CallerMethodDesc
+ON Invocations (TargetMethodDesc(255));
+
+CREATE INDEX IDX_Invocations_TargetMethodDesc
+ON Invocations (CallerMethodDesc(255));
 
 
-IF OBJECT_ID('Permissions') IS NOT NULL
-	DROP TABLE Permissions;
-GO
+
+
+
+
+
+SET FOREIGN_KEY_CHECKS=0; 
+DROP TABLE IF EXISTS Permissions;
+SET FOREIGN_KEY_CHECKS=1;
 
 CREATE TABLE Permissions
 (
-	Permission varchar(512) NOT NULL,
-	Version varchar(32) NOT NULL,
-	FoundBy varchar(128),
-	CONSTRAINT PK_Permissions PRIMARY KEY CLUSTERED (Permission, Version)
-)
+	ID int auto_increment PRIMARY KEY,
+	Permission varchar(255) NOT NULL,
+	Version varchar(15) NOT NULL
+);
 
 
+DROP VIEW IF EXISTS vwMethods;
 
-IF OBJECT_ID('KnownPermissionChecks') IS NOT NULL
-	DROP TABLE KnownPermissionChecks;
-GO
-CREATE TABLE KnownPermissionChecks(
-ID int IDENTITY(1,1) PRIMARY KEY,
-ClassName varchar(256) NOT NULL,
-MethodName varchar(128) NOT NULL,
-Descriptor varchar(max) NOT NULL,
-Version varchar(16) NOT NULL
-)
-
+CREATE VIEW vwMethods AS
+SELECT c.ID as ClassID, m.ID as MethodID, c.ClassName as ClassName, m.MethodName, m.Version, m.Access, m.Signature, m.Descriptor, m.Exceptions, m.IsAbstract, m.IsNative
+FROM Methods m, Classes c
+WHERE c.ID = m.ClassId

@@ -2,8 +2,11 @@ package pscout.util;
 
 import java.lang.ProcessBuilder.Redirect;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class BashRunner implements Runnable {
+	private final Logger LOGGER = Logger.getLogger(BashRunner.class.getName());
 	private final List<String> bashCommands;
 	private final boolean async;
 	
@@ -21,7 +24,7 @@ public class BashRunner implements Runnable {
 			// wait for thread if not asynchronous
 			if(!async) process.waitFor();
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.log(Level.SEVERE, e.toString(), e);
 		}
 	}
 }

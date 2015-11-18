@@ -2,7 +2,7 @@ package pscout.util;
 
 import java.util.List;
 
-public class StringJoiner {
+public class StringUtility {
 	public static String join(String[] strings, String delimiter){
 		if(strings == null){
 			return null;
