@@ -1,4 +1,4 @@
-package pscout.core;
+package pscout.util;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

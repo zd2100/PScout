@@ -38,7 +38,7 @@ public class BuildCHCG {
 			
 			// shut down thread pool
 			this.threadPool.shutdown();
-			this.threadPool.awaitTermination(10l, TimeUnit.MINUTES);
+			this.threadPool.awaitTermination(Integer.MAX_VALUE, TimeUnit.SECONDS);
 			
 		}catch(Exception e){
 			LOGGER.log(Level.SEVERE, e.getMessage(), e);

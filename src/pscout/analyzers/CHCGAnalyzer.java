@@ -15,13 +15,13 @@ import org.objectweb.asm.Opcodes;
 
 import com.google.inject.Inject;
 
-import pscout.core.Statistics;
 import pscout.db.IDataProvider;
 import pscout.models.Class;
 import pscout.models.Config;
 import pscout.models.Invocation;
 import pscout.models.Method;
 import pscout.util.AsmUtility;
+import pscout.util.Statistics;
 import pscout.util.AsmUtility.AccessTypes;
 import pscout.util.StringUtility;
 
@@ -31,7 +31,6 @@ public class CHCGAnalyzer implements Runnable {
 	private final Config config;
 	private File classFile;
 
-	@Inject
 	public CHCGAnalyzer(IDataProvider dataProvider, Config config){
 		this.dataProvider = dataProvider;
 		this.config = config;

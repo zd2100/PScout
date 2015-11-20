@@ -8,14 +8,13 @@ import java.util.logging.Logger;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
-import pscout.analyzers.BackTracer;
 import pscout.core.BuildCHCG;
 import pscout.core.ExtractJarFile;
-import pscout.core.Statistics;
 import pscout.db.IDataProvider;
 
 import pscout.models.Class;
 import pscout.models.Method;
+import pscout.util.Statistics;
 
 public class PScout {
 	private static Logger LOGGER = Logger.getLogger(PScout.class.getName());
@@ -47,15 +46,7 @@ public class PScout {
 		LOGGER.log(Level.INFO, Statistics.getTime() + "\tClass: " + Statistics.classCount.get() + 
 				"\tMethods: " + Statistics.methodCount.get() + "\tInvocations: " + Statistics.invocationCount.get() );
 	}
-	
-	public void backTrack(){
-		BackTracer backTracer = this.injector.getInstance(BackTracer.class);
-		IDataProvider dataProvider = this.injector.getInstance(IDataProvider.class);
-		Class cls = dataProvider.getClassByName("android/app/IActivityManager", "4.4.1");
-		Method method = dataProvider.getMethod(cls.className, "checkPermission", "(Ljava/lang/String;II)I", "4.4.1");
-		backTracer.analyze(cls, method, 1);
-	}
-	
+
 	public void shutdown(){
 		IDataProvider dataProvider = this.injector.getInstance(IDataProvider.class);
 		dataProvider.shutdown();
@@ -72,9 +63,7 @@ public class PScout {
 		pscout.buildClassHierarchyCallGraph();
 		LOGGER.log(Level.INFO, Statistics.getTime() + "\tDone!");
 		*/
-		
-		pscout.backTrack();
-		
+
 		pscout.shutdown();
 	}
 }

@@ -11,8 +11,6 @@ import com.google.inject.AbstractModule;
 import com.google.inject.Provides;
 import com.google.inject.Scopes;
 
-import pscout.analyzers.BackTracer;
-import pscout.analyzers.CHCGAnalyzer;
 import pscout.core.BuildCHCG;
 import pscout.core.ExtractJarFile;
 import pscout.db.IDataProvider;
@@ -26,9 +24,7 @@ public class PScoutModule extends AbstractModule{
 	protected void configure() {
 		this.bind(IDataProvider.class).to(SqlDataProvider.class).in(Scopes.SINGLETON);
 		this.bind(ExtractJarFile.class).in(Scopes.SINGLETON);
-		this.bind(CHCGAnalyzer.class);
 		this.bind(BuildCHCG.class);
-		this.bind(BackTracer.class);
 	}
 	
 	@Provides @Singleton

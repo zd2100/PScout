@@ -155,7 +155,7 @@ public class SqlDataProvider implements IDataProvider {
 	public List<Invocation> findInvocations(String className, String methodName, String descriptor, String version){
 		final String sql = "SELECT ID, InvokeType, CallerClass, CallerMethod, CallerMethodDesc, TargetClass, TargetMethod, TargetMethodDesc, Version"
 				+ " FROM Invocations"
-				+ " WHERE TargetClass = :className AND targetMethod = :methodName AND TargetMethodDesc = :desciptor AND Version = :version";
+				+ " WHERE TargetClass = :className AND targetMethod = :methodName AND TargetMethodDesc = :descriptor AND Version = :version";
 		
 		try(Connection con = this.getConnection()){
 			return con.createQuery(sql)

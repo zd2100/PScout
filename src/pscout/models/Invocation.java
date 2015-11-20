@@ -14,7 +14,7 @@ public class Invocation {
 	@Override
 	public String toString(){
 		return "Invoke: " + invokeType + "\t" + "[" + callerClass + "]"
-				+ "." + callerMethod + "(" + callerMethodDesc + ")" +"\t=>\t"
-				+ "[" + targetClass + "]" + "." + targetMethod + "(" + targetMethodDesc + ")";
+				+ "." + callerMethod + callerMethodDesc +"\t=>\t"
+				+ "[" + targetClass + "]" + "." + targetMethod + targetMethodDesc ;
 	}
 }
