@@ -20,4 +20,8 @@ public class Config {
 	/* Extract */
 	public String[] extractJarCommands;
 	public String extractJarBash;
+	
+	public String getClassDumpPath(){
+		return this.classDumpPath + (this.classDumpPath.endsWith("\\") ? "": "\\");
+	}
 }

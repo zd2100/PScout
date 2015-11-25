@@ -14,8 +14,8 @@ public class PermissionResult {
 	}
 
 	public enum Status{
-		Internal, // permission found within method
-		External, // permission is passed in via parameter
+		Found, // permission found within method
+		FromParent, // permission is passed in via parameter
 		Unknown // permission cannot be determined
 	}
 }

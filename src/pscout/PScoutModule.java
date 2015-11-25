@@ -14,7 +14,7 @@ import com.google.inject.Scopes;
 import pscout.core.BuildCHCG;
 import pscout.core.ExtractJarFile;
 import pscout.db.IDataProvider;
-import pscout.db.SqlDataProvider;
+import pscout.db.MySqlDataProvider;
 import pscout.models.Config;
 
 public class PScoutModule extends AbstractModule{
@@ -22,7 +22,7 @@ public class PScoutModule extends AbstractModule{
 
 	@Override
 	protected void configure() {
-		this.bind(IDataProvider.class).to(SqlDataProvider.class).in(Scopes.SINGLETON);
+		this.bind(IDataProvider.class).to(MySqlDataProvider.class).in(Scopes.SINGLETON);
 		this.bind(ExtractJarFile.class).in(Scopes.SINGLETON);
 		this.bind(BuildCHCG.class);
 	}

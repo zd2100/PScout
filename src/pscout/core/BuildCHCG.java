@@ -57,6 +57,7 @@ public class BuildCHCG {
 					if(fileOrDirectory.getName().endsWith(".class")) {
 						CHCGAnalyzer analyzer = new CHCGAnalyzer(this.provider, this.config, fileOrDirectory);
 						this.threadPool.submit(analyzer);
+				//		analyzer.run();
 					}	
 				}
 				// End of if-else

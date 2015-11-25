@@ -5,10 +5,10 @@ SET FOREIGN_KEY_CHECKS=1;
 CREATE TABLE Classes
 (
 ID int auto_increment PRIMARY KEY,
-ClassName varchar(255) NOT NULL,
+ClassName varchar(127) NOT NULL,
 Version varchar(15) NOT NULL,
 Access varchar(63),
-SuperClass varchar(255),
+SuperClass varchar(127),
 Signature text,
 Interfaces text,
 IsAbstract bit,
@@ -60,6 +60,8 @@ IsNative bit,
 FOREIGN KEY (ClassId) REFERENCES Classes(ID) ON DELETE CASCADE
 );
 
+ALTER TABLE Methods ADD UNIQUE IDX_Unique (ClassId, MethodName, Descriptor(255), Version);
+
 CREATE INDEX IDX_Methods_MethodName
 ON Methods (MethodName);
 
@@ -85,7 +87,6 @@ ON Methods (IsNative);
 
 
 
-
 SET FOREIGN_KEY_CHECKS=0; 
 DROP TABLE IF EXISTS Invocations;
 SET FOREIGN_KEY_CHECKS=1;
@@ -94,14 +95,16 @@ CREATE TABLE Invocations
 (
 ID int auto_increment PRIMARY KEY,
 InvokeType varchar(15) NOT NULL,
-CallerClass varchar(255) NOT NULL,
+CallerClass varchar(127) NOT NULL,
 CallerMethod varchar(127) NOT NULL,
 CallerMethodDesc text NOT NULL,
-TargetClass varchar(255) NOT NULL,
+TargetClass varchar(127) NOT NULL,
 TargetMethod varchar(127) NOT NULL,
 TargetMethodDesc text NOT NULL,
 Version varchar(15) NOT NULL
 );
+
+ALTER TABLE Invocations ADD UNIQUE IDX_Unique (CallerClass, CallerMethod, CallerMethodDesc(240), TargetClass, TargetMethod,TargetMethodDesc(240), Version);
 
 CREATE INDEX IDX_Invocations_Version
 ON Invocations (Version);
@@ -134,20 +137,53 @@ ON Invocations (CallerMethodDesc(255));
 
 
 SET FOREIGN_KEY_CHECKS=0; 
-DROP TABLE IF EXISTS Permissions;
+DROP TABLE IF EXISTS PermissionInvocations;
 SET FOREIGN_KEY_CHECKS=1;
 
-CREATE TABLE Permissions
+CREATE TABLE PermissionInvocations
 (
-	ID int auto_increment PRIMARY KEY,
-	Permission varchar(255) NOT NULL,
-	Version varchar(15) NOT NULL
+	InvocationId int NOT NULL,
+	Permission varchar(127) NOT NULL,
+	FOREIGN KEY (InvocationId) REFERENCES Invocations(ID) ON DELETE CASCADE
 );
+
+alter table PermissionInvocations add primary key (InvocationId, Permission);
+
+
+
 
 
 DROP VIEW IF EXISTS vwMethods;
 
 CREATE VIEW vwMethods AS
+(
 SELECT c.ID as ClassID, m.ID as MethodID, c.ClassName as ClassName, m.MethodName, m.Version, m.Access, m.Signature, m.Descriptor, m.Exceptions, m.IsAbstract, m.IsNative
 FROM Methods m, Classes c
 WHERE c.ID = m.ClassId
+);
+
+
+
+DROP VIEW IF EXISTS vwPermissionInvocation;
+CREATE VIEW vwPermissionInvocation
+AS
+(
+SELECT i.*, p.Permission FROM PermissionInvocations p left join Invocations i ON p.InvocationId = i.ID
+);
+
+
+
+
+
+DELIMITER $$
+CREATE PROCEDURE spAddInvocation
+(IN invokeType varchar(15), IN caller varchar(255), IN callerMethod varchar(127), IN callerDesc text, IN target varchar(255), IN targetMethod varchar(127), IN targetDesc text, IN version varchar(15))
+BEGIN
+
+	INSERT INTO Invocations (InvokeType, CallerClass, CallerMethod, CallerMethodDesc, TargetClass, TargetMethod, TargetMethodDesc, Version) 
+		SELECT invokeType, caller, callerMethod, callerDesc, target, targetMethod, targetDesc, version FROM (SELECT 1) temp 
+    WHERE NOT EXISTS 
+		(SELECT ID FROM Invocations WHERE InvokeType = invokeType AND CallerClass = caller AND CallerMethod = callerMethod AND CallerMethodDesc = callerDesc AND TargetClass = target AND TargetMethod = targetMethod AND TargetMethodDesc = targetDesc AND Version = verion);
+        
+END
+$$

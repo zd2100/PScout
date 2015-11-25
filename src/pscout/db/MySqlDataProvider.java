@@ -15,15 +15,15 @@ import pscout.models.Config;
 import pscout.models.Invocation;
 import pscout.models.Method;
 
-public class SqlDataProvider implements IDataProvider {
+public class MySqlDataProvider implements IDataProvider {
 	
-	private static final Logger LOGGER = Logger.getLogger(SqlDataProvider.class.getName());
+	private static final Logger LOGGER = Logger.getLogger(MySqlDataProvider.class.getName());
 	
 	private final ComboPooledDataSource dataSource;
 	private final Sql2o sql2o;
 	
 	@Inject
-	public SqlDataProvider(Config config) throws Exception{
+	public MySqlDataProvider(Config config) throws Exception{
 		if(config == null) throw new Exception("config is null");
 		this.dataSource = new ComboPooledDataSource();
 		this.dataSource.setDriverClass(config.driverClass);
@@ -35,14 +35,17 @@ public class SqlDataProvider implements IDataProvider {
 
 	@Override
 	public void addClass(Class cls) {
-		final String sql = "INSERT INTO Classes (ClassName,Version,Access,Signature,SuperClass,Interfaces,IsAbstract,IsInterface,IsEnum)"
+		final String sql = "INSERT IGNORE INTO Classes (ClassName,Version,Access,Signature,SuperClass,Interfaces,IsAbstract,IsInterface,IsEnum)"
 				+ " VALUES (:className, :version, :access, :signature, :superClass, :interfaces, :isAbstract, :isInterface, :isEnum)";
 		
 		try(Connection con = this.getConnection()){
-			cls.id = (long)con.createQuery(sql, true)
+			Object value = con.createQuery(sql, true)
 						.bind(cls)
 						.executeUpdate()
 						.getKey();
+			if(value != null){
+				cls.id = (long) value;
+			}
 		}catch(Exception e){
 			LOGGER.log(Level.SEVERE, e.getMessage(), e);
 		}
@@ -50,13 +53,16 @@ public class SqlDataProvider implements IDataProvider {
 
 	@Override
 	public void addMethod(Method method) {
-		final String sql = "INSERT INTO Methods (ClassId, MethodName,Version,Access,Signature,Descriptor,Exceptions,IsAbstract,IsNative)" 
+		final String sql = "INSERT IGNORE INTO Methods (ClassId, MethodName,Version,Access,Signature,Descriptor,Exceptions,IsAbstract,IsNative)" 
 				+ " VALUES (:classId, :methodName, :version, :access, :signature, :descriptor, :exceptions, :isAbstract, :isNative)";
 		try(Connection con = this.getConnection()){
-				method.id = (long)con.createQuery(sql, true)
+			Object value = con.createQuery(sql, true)
 							.bind(method)
 							.executeUpdate()
 							.getKey();
+			if(value != null){
+				method.id = (long) value;
+			}
 		}catch(Exception e){
 			LOGGER.log(Level.SEVERE, e.getMessage(), e);
 		}
@@ -64,13 +70,29 @@ public class SqlDataProvider implements IDataProvider {
 
 	@Override
 	public void addInvocation(Invocation invocation) {
-		final String sql = "INSERT INTO Invocations (InvokeType, CallerClass, CallerMethod, CallerMethodDesc, TargetClass, TargetMethod, TargetMethodDesc, Version)" 
+		final String sql = "INSERT IGNORE INTO Invocations (InvokeType, CallerClass, CallerMethod, CallerMethodDesc, TargetClass, TargetMethod, TargetMethodDesc, Version)" 
 				+ " VALUES (:invokeType, :callerClass, :callerMethod, :callerMethodDesc, :targetClass, :targetMethod, :targetMethodDesc, :version)";
 		try(Connection con = this.getConnection()){
-				invocation.id = (long)con.createQuery(sql, true)
+				Object value = con.createQuery(sql, true)
 							.bind(invocation)
 							.executeUpdate()
 							.getKey();
+				if(value != null){
+					invocation.id = (long) value;
+				}
+		}catch(Exception e){
+			LOGGER.log(Level.SEVERE, e.getMessage(), e);
+		}
+	}
+	
+	@Override
+	public void addPermissionInvocation(Invocation invocation, String permission) {
+		final String sql = "INSERT IGNORE INTO PermissionInvocations (InvocationId, Permission) VALUES (:id, :permission)";
+		try(Connection con = this.getConnection()){
+				con.createQuery(sql)
+				.addParameter("id", invocation.id)
+				.addParameter("permission", permission)
+				.executeUpdate();
 		}catch(Exception e){
 			LOGGER.log(Level.SEVERE, e.getMessage(), e);
 		}
@@ -91,7 +113,7 @@ public class SqlDataProvider implements IDataProvider {
 	}
 	
 	@Override
-	public Class getClassByName(String className, String version){
+	public Class getClass(String className, String version){
 		final String sql = "SELECT ID, ClassName, Version, Access, SuperClass, Signature, Interfaces, IsAbstract, IsInterface, IsEnum FROM Classes"
 				+ " WHERE ClassName = :className AND Version = :version";
 		try(Connection con = this.getConnection()){

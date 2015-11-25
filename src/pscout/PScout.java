@@ -1,13 +1,16 @@
 package pscout;
 
+import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
+import pscout.core.AnalyzeInvocation;
 import pscout.core.BuildCHCG;
 import pscout.core.ExtractJarFile;
 import pscout.db.IDataProvider;
@@ -46,6 +49,11 @@ public class PScout {
 		LOGGER.log(Level.INFO, Statistics.getTime() + "\tClass: " + Statistics.classCount.get() + 
 				"\tMethods: " + Statistics.methodCount.get() + "\tInvocations: " + Statistics.invocationCount.get() );
 	}
+	
+	public void analyzeInvocations(){
+		AnalyzeInvocation analyzer = this.injector.getInstance(AnalyzeInvocation.class);
+		analyzer.analyze();
+	}
 
 	public void shutdown(){
 		IDataProvider dataProvider = this.injector.getInstance(IDataProvider.class);
@@ -54,15 +62,18 @@ public class PScout {
 
 	public static void main(String[] args) {
 		PScout pscout = new PScout();
-		/*
+/*
 		LOGGER.log(Level.INFO, Statistics.getTime() + "\tExtracting Jars...");
 		pscout.extractJars();
 		LOGGER.log(Level.INFO, Statistics.getTime() + "\tDone!");
-
+*/
 		LOGGER.log(Level.INFO, Statistics.getTime() + "\tCHCG Start...");
 		pscout.buildClassHierarchyCallGraph();
 		LOGGER.log(Level.INFO, Statistics.getTime() + "\tDone!");
-		*/
+		
+		LOGGER.log(Level.INFO, Statistics.getTime() + "\tAnalyze Permission Start...");
+		pscout.analyzeInvocations();
+		LOGGER.log(Level.INFO, Statistics.getTime() + "\tDone!");
 
 		pscout.shutdown();
 	}
