@@ -1,9 +1,7 @@
 package pscout;
 
-import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
-import java.util.logging.FileHandler;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -15,10 +13,12 @@ import pscout.core.BuildCHCG;
 import pscout.core.ExtractJarFile;
 import pscout.db.IDataProvider;
 
-import pscout.models.Class;
-import pscout.models.Method;
 import pscout.util.Statistics;
 
+/**
+ * The Main entry point for PScout. This class provide main routine calls
+ * @author Ding Zhu
+ */
 public class PScout {
 	private static Logger LOGGER = Logger.getLogger(PScout.class.getName());
 	
@@ -28,11 +28,19 @@ public class PScout {
 		this.injector = Guice.createInjector(new PScoutModule());
 	}
 	
+	/**
+	 * Step 1: Extract jar files to class files
+	 */
 	public void extractJars(){
 		ExtractJarFile extractor = this.injector.getInstance(ExtractJarFile.class);
 		extractor.execute();
 	}
 	
+	/**
+	 * Step 2: Build ClassHierarchy and Call Graph
+	 * A timer is setup to repeatedly report number of class/method/invocation being processed
+	 * Current report rate is 5 seconds
+	 */
 	public void buildClassHierarchyCallGraph(){
 		Timer timer = new Timer();
 		timer.scheduleAtFixedRate(new TimerTask(){
@@ -50,16 +58,27 @@ public class PScout {
 				"\tMethods: " + Statistics.methodCount.get() + "\tInvocations: " + Statistics.invocationCount.get() );
 	}
 	
+	/**
+	 * Step 3: Analyze Permission Invocation. 
+	 * This is the main method to extract permission strings and permission invocations
+	 */
 	public void analyzeInvocations(){
 		AnalyzeInvocation analyzer = this.injector.getInstance(AnalyzeInvocation.class);
 		analyzer.analyze();
 	}
 
+	/**
+	 * Final Step: Cleanly shutdown all services and release all resources.
+	 */
 	public void shutdown(){
 		IDataProvider dataProvider = this.injector.getInstance(IDataProvider.class);
 		dataProvider.shutdown();
 	}
 
+	/**
+	 * Main entry point
+	 * @param args option parameters 
+	 */
 	public static void main(String[] args) {
 		PScout pscout = new PScout();
 /*

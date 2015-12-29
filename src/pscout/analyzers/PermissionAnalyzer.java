@@ -125,8 +125,15 @@ public class PermissionAnalyzer {
 	}
 
 	
-
+	
 	/* Static Helpers */
+	/**
+	 * Find and return the class of the given name
+	 * @param name ClassName
+	 * @param config Configuration
+	 * @return ClassNode
+	 * @throws Exception Class does not exist
+	 */
 	private static ClassNode loadClass(String name, Config config) throws Exception {
 		String filePath = config.getClassDumpPath() + name.replace('.', '/') + ".class";
 		
@@ -136,6 +143,13 @@ public class PermissionAnalyzer {
 		return node;
 	}
 	
+	/**
+	 * Return a MethodNode of the matching name and descriptor from the class
+	 * @param cls Class Node
+	 * @param methodName Method Name
+	 * @param methodDesc Method Descriptor
+	 * @return MethodNode
+	 */
 	@SuppressWarnings("unchecked")
 	private static MethodNode getMethod(ClassNode cls, String methodName, String methodDesc){
 		for(MethodNode method : (List<MethodNode>)cls.methods){
@@ -147,6 +161,12 @@ public class PermissionAnalyzer {
 		return null;
 	}
 	
+	/**
+	 * Return the value of the static field or null if the field does not exist
+	 * @param cls Class Node
+	 * @param name Field Name
+	 * @return value of static field or null
+	 */
 	@SuppressWarnings("unchecked")
 	private static Object getField(ClassNode cls, String name){
 		for(FieldNode field : (List<FieldNode>)cls.fields){
@@ -157,6 +177,11 @@ public class PermissionAnalyzer {
 		return null;
 	}
 
+	/**
+	 * Count the number of parameters of a method
+	 * @param desc Method Descriptor
+	 * @return number of parameters of the given method
+	 */
 	private static int paramCount(String desc){
 		String baseTypes = "BCDFIJSZ";
 		int count = 0;

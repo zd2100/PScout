@@ -17,6 +17,10 @@ import pscout.db.IDataProvider;
 import pscout.db.MySqlDataProvider;
 import pscout.models.Config;
 
+/**
+ * Google Guice IoC loading module
+ * @author Ding Zhu
+ */
 public class PScoutModule extends AbstractModule{
 	private static Logger LOGGER = Logger.getLogger(PScoutModule.class.getName());
 

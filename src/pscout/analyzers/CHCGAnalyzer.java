@@ -25,27 +25,40 @@ import pscout.util.Statistics;
 import pscout.util.AsmUtility.AccessTypes;
 import pscout.util.StringUtility;
 
+/**
+ * Class Hierarchy and Call Graph Analyzer.
+ * Implement Runnable interface, capable to be run in independent thread
+ * @author Ding Zhu
+ */
 public class CHCGAnalyzer implements Runnable {
 	private final Logger LOGGER = Logger.getLogger(CHCGAnalyzer.class.getName());
 	private final IDataProvider dataProvider;
 	private final Config config;
 	private File classFile;
 
-	public CHCGAnalyzer(IDataProvider dataProvider, Config config){
-		this.dataProvider = dataProvider;
-		this.config = config;
-	}
-	
+	/**
+	 * Basic Constructor
+	 * @param dataProvider IDatProvider interface. Supply with database functionality to load/save class/method/invocation
+	 * @param config Global Configuration. Provide jar path, class path
+	 * @param file The specific class file to be analyzed
+	 */
 	public CHCGAnalyzer(IDataProvider dataProvider, Config config, File file){
 		this.dataProvider = dataProvider;
 		this.config = config;
 		this.classFile = file;
 	}
 	
+	/**
+	 * Setter method for class file
+	 * @param file Class File to be analyzed
+	 */
 	public void setClassFile(File file){
 		this.classFile = file;
 	}
 
+	/**
+	 * Main run method from Runnable interface
+	 */
 	@Override
 	public void run() {
 		try{
@@ -60,6 +73,10 @@ public class CHCGAnalyzer implements Runnable {
 	
 
 	/* ---------------- Class Visitor ----------------- */
+	/**
+	 * ASM Class Visitor implementation
+	 * @author Ding
+	 */
 	private class AsmClassVisitor extends ClassVisitor{
 		private final IDataProvider dataProvider;
 		private final Class cls;
@@ -112,6 +129,10 @@ public class CHCGAnalyzer implements Runnable {
 	
 	
 	/* -------------- Method Visitor -------------- */
+	/**
+	 * ASM method visitor implementation
+	 * @author Ding Zhu
+	 */
 	private class AsmMethodVisitor extends MethodVisitor{
 		private final Config config;
 		private final IDataProvider dbProvider;
