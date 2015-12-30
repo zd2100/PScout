@@ -13,7 +13,8 @@ Signature text,
 Interfaces text,
 IsAbstract bit,
 IsInterface bit,
-IsEnum bit
+IsEnum bit,
+IsPublic bit
 );
 
 CREATE UNIQUE INDEX IDX_Classes_ClassName_Version
@@ -37,6 +38,9 @@ ON Classes (Interfaces(255));
 CREATE INDEX IDX_Classes_IsInterface
 ON Classes (IsInterface);
 
+CREATE INDEX IDX_Classes_IsPublic
+ON Classes (IsPublic);
+
 
 
 
@@ -57,6 +61,7 @@ Descriptor text NOT NULL,
 Exceptions text,
 IsAbstract bit,
 IsNative bit,
+IsPublic bit,
 FOREIGN KEY (ClassId) REFERENCES Classes(ID) ON DELETE CASCADE
 );
 
@@ -82,6 +87,9 @@ ON Methods (IsAbstract);
 
 CREATE INDEX IDX_Methods_IsNative
 ON Methods (IsNative);
+
+CREATE INDEX IDX_Methods_IsPublic
+ON Methods (IsPublic);
 
 
 
@@ -152,7 +160,6 @@ alter table PermissionInvocations add primary key (InvocationId, Permission);
 
 
 
-
 DROP VIEW IF EXISTS vwMethods;
 
 CREATE VIEW vwMethods AS
@@ -168,14 +175,14 @@ DROP VIEW IF EXISTS vwPermissionInvocation;
 CREATE VIEW vwPermissionInvocation
 AS
 (
-SELECT i.*, p.Permission FROM PermissionInvocations p left join Invocations i ON p.InvocationId = i.ID
+SELECT vm.Access, i.*, p.Permission FROM PermissionInvocations p left join Invocations i ON p.InvocationId = i.ID
+	left join vwMethods vm ON i.CallerClass = vm.ClassName AND i.CallerMethod = vm.MethodName AND i.CallerMethodDesc = vm.Descriptor
 );
 
 
 
-
-
 DELIMITER $$
+DROP PROCEDURE IF EXISTS spAddInvocation;
 CREATE PROCEDURE spAddInvocation
 (IN invokeType varchar(15), IN caller varchar(255), IN callerMethod varchar(127), IN callerDesc text, IN target varchar(255), IN targetMethod varchar(127), IN targetDesc text, IN version varchar(15))
 BEGIN

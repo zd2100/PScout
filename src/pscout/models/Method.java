@@ -11,6 +11,7 @@ public class Method {
 	public String exceptions;
 	public boolean isAbstract;
 	public boolean isNative;
+	public boolean isPublic;
 	
 	@Override
 	public String toString(){

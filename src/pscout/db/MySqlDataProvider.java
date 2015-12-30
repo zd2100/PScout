@@ -35,8 +35,8 @@ public class MySqlDataProvider implements IDataProvider {
 
 	@Override
 	public void addClass(Class cls) {
-		final String sql = "INSERT IGNORE INTO Classes (ClassName,Version,Access,Signature,SuperClass,Interfaces,IsAbstract,IsInterface,IsEnum)"
-				+ " VALUES (:className, :version, :access, :signature, :superClass, :interfaces, :isAbstract, :isInterface, :isEnum)";
+		final String sql = "INSERT IGNORE INTO Classes (ClassName,Version,Access,Signature,SuperClass,Interfaces,IsAbstract,IsInterface,IsEnum,IsPublic)"
+				+ " VALUES (:className, :version, :access, :signature, :superClass, :interfaces, :isAbstract, :isInterface, :isEnum, :isPublic)";
 		
 		try(Connection con = this.getConnection()){
 			Object value = con.createQuery(sql, true)
@@ -53,8 +53,8 @@ public class MySqlDataProvider implements IDataProvider {
 
 	@Override
 	public void addMethod(Method method) {
-		final String sql = "INSERT IGNORE INTO Methods (ClassId, MethodName,Version,Access,Signature,Descriptor,Exceptions,IsAbstract,IsNative)" 
-				+ " VALUES (:classId, :methodName, :version, :access, :signature, :descriptor, :exceptions, :isAbstract, :isNative)";
+		final String sql = "INSERT IGNORE INTO Methods (ClassId, MethodName,Version,Access,Signature,Descriptor,Exceptions,IsAbstract,IsNative,IsPublic)" 
+				+ " VALUES (:classId, :methodName, :version, :access, :signature, :descriptor, :exceptions, :isAbstract, :isNative, IsPublic)";
 		try(Connection con = this.getConnection()){
 			Object value = con.createQuery(sql, true)
 							.bind(method)

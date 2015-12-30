@@ -11,6 +11,7 @@ public class Class {
 	public boolean isAbstract;
 	public boolean isInterface;
 	public boolean isEnum;
+	public boolean isPublic;
 	
 	@Override
 	public String toString(){

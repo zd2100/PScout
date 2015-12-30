@@ -100,6 +100,7 @@ public class CHCGAnalyzer implements Runnable {
 			this.cls.isEnum = AsmUtility.isEnum(access);
 			this.cls.isInterface = AsmUtility.isInterface(access);
 			this.cls.interfaces = StringUtility.join(interfaces, ";");
+			this.cls.isPublic = AsmUtility.isPublic(access);
 			 
 			this.dataProvider.addClass(this.cls);
 			Statistics.classCount.incrementAndGet();
@@ -117,6 +118,7 @@ public class CHCGAnalyzer implements Runnable {
 			if(exceptions != null) method.exceptions = StringUtility.join(exceptions, ";");
 			method.isAbstract = AsmUtility.isAbstract(access);
 			method.isNative = AsmUtility.isNative(access);
+			method.isPublic = AsmUtility.isPublic(access);
 
 			this.dataProvider.addMethod(method);
 			Statistics.methodCount.incrementAndGet();

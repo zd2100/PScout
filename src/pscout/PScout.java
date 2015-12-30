@@ -80,20 +80,33 @@ public class PScout {
 	 * @param args option parameters 
 	 */
 	public static void main(String[] args) {
-		PScout pscout = new PScout();
-/*
-		LOGGER.log(Level.INFO, Statistics.getTime() + "\tExtracting Jars...");
-		pscout.extractJars();
-		LOGGER.log(Level.INFO, Statistics.getTime() + "\tDone!");
-*/
-		LOGGER.log(Level.INFO, Statistics.getTime() + "\tCHCG Start...");
-		pscout.buildClassHierarchyCallGraph();
-		LOGGER.log(Level.INFO, Statistics.getTime() + "\tDone!");
 		
-		LOGGER.log(Level.INFO, Statistics.getTime() + "\tAnalyze Permission Start...");
-		pscout.analyzeInvocations();
-		LOGGER.log(Level.INFO, Statistics.getTime() + "\tDone!");
-
-		pscout.shutdown();
+		if(args.length == 1){
+			int step = Integer.parseInt(args[0]);
+			
+			PScout pscout = new PScout();
+			
+			switch(step){
+				case 1:
+					LOGGER.log(Level.INFO, Statistics.getTime() + "\tExtracting Jars...");
+					pscout.extractJars();
+					LOGGER.log(Level.INFO, Statistics.getTime() + "\tDone!");
+					break;
+				case 2:
+					LOGGER.log(Level.INFO, Statistics.getTime() + "\tCHCG Start...");
+					pscout.buildClassHierarchyCallGraph();
+					LOGGER.log(Level.INFO, Statistics.getTime() + "\tDone!");
+					break;
+				case 3:
+					LOGGER.log(Level.INFO, Statistics.getTime() + "\tAnalyze Permission Start...");
+					pscout.analyzeInvocations();
+					LOGGER.log(Level.INFO, Statistics.getTime() + "\tDone!");
+					break;
+					default:
+						break;
+			}
+			
+			pscout.shutdown();
+		}
 	}
 }
