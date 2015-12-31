@@ -164,9 +164,18 @@ DROP VIEW IF EXISTS vwMethods;
 
 CREATE VIEW vwMethods AS
 (
-SELECT c.ID as ClassID, m.ID as MethodID, c.ClassName as ClassName, m.MethodName, m.Version, m.Access, m.Signature, m.Descriptor, m.Exceptions, m.IsAbstract, m.IsNative
+SELECT c.ID as ClassID, m.ID as MethodID, c.ClassName as ClassName, m.MethodName, m.Version, m.Access, m.Signature, m.Descriptor, m.Exceptions, m.IsAbstract, m.IsNative, m.IsPublic
 FROM Methods m, Classes c
 WHERE c.ID = m.ClassId
+);
+
+DROP VIEW IF EXISTS vwPublicMethods;
+
+CREATE VIEW vwPublicMethods AS
+(
+SELECT m.*
+FROM vwMethods m LEFT JOIN Classes c ON m.ClassID = c.ID
+WHERE m.IsPublic = 1 AND c.IsPublic = 1
 );
 
 
@@ -177,6 +186,15 @@ AS
 (
 SELECT vm.Access, i.*, p.Permission FROM PermissionInvocations p left join Invocations i ON p.InvocationId = i.ID
 	left join vwMethods vm ON i.CallerClass = vm.ClassName AND i.CallerMethod = vm.MethodName AND i.CallerMethodDesc = vm.Descriptor
+);
+
+DROP VIEW IF EXISTS vwPublicPermissionInvocation;
+CREATE VIEW vwPublicPermissionInvocation
+AS
+(
+SELECT p.*
+FROM vwPermissionInvocation p
+WHERE EXISTS (SELECT 1 FROM vwPublicMethods pm WHERE p.CallerClass = pm.ClassName AND p.CallerMethod = pm.MethodName AND p.CallerMethodDesc = pm.Descriptor AND p.Version = pm.Version)
 );
 
 

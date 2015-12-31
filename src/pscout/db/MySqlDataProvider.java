@@ -54,7 +54,7 @@ public class MySqlDataProvider implements IDataProvider {
 	@Override
 	public void addMethod(Method method) {
 		final String sql = "INSERT IGNORE INTO Methods (ClassId, MethodName,Version,Access,Signature,Descriptor,Exceptions,IsAbstract,IsNative,IsPublic)" 
-				+ " VALUES (:classId, :methodName, :version, :access, :signature, :descriptor, :exceptions, :isAbstract, :isNative, IsPublic)";
+				+ " VALUES (:classId, :methodName, :version, :access, :signature, :descriptor, :exceptions, :isAbstract, :isNative, :isPublic)";
 		try(Connection con = this.getConnection()){
 			Object value = con.createQuery(sql, true)
 							.bind(method)
