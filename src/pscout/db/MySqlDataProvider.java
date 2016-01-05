@@ -144,7 +144,7 @@ public class MySqlDataProvider implements IDataProvider {
 	@Override
 	public Method getMethod(String clsName, String methodName, String descriptor, String version) {
 		final String sql = "SELECT Id, ClassId, MethodName,Version,Access,Signature,Descriptor,Exceptions,IsAbstract,IsNative FROM Methods"
-				+ " WHERE ClassId = (SELECT Id FROM Classes WHERE ClassName = :clsName) AND MethodName = :methodName AND Descriptor = :descriptor AND version = :version";
+				+ " WHERE ClassId = (SELECT Id FROM Classes WHERE ClassName = :clsName AND Version = :version) AND MethodName = :methodName AND Descriptor = :descriptor AND Version = :version";
 		try(Connection con = this.getConnection()){
 			return con.createQuery(sql)
 					.addParameter("clsName", clsName)

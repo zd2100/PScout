@@ -185,7 +185,7 @@ CREATE VIEW vwPermissionInvocation
 AS
 (
 SELECT vm.Access, i.*, p.Permission FROM PermissionInvocations p left join Invocations i ON p.InvocationId = i.ID
-	left join vwMethods vm ON i.CallerClass = vm.ClassName AND i.CallerMethod = vm.MethodName AND i.CallerMethodDesc = vm.Descriptor
+	left join vwMethods vm ON i.CallerClass = vm.ClassName AND i.CallerMethod = vm.MethodName AND i.CallerMethodDesc = vm.Descriptor AND vm.Version = i.Version
 );
 
 DROP VIEW IF EXISTS vwPublicPermissionInvocation;
@@ -198,9 +198,8 @@ WHERE EXISTS (SELECT 1 FROM vwPublicMethods pm WHERE p.CallerClass = pm.ClassNam
 );
 
 
-
-DELIMITER $$
 DROP PROCEDURE IF EXISTS spAddInvocation;
+DELIMITER $$
 CREATE PROCEDURE spAddInvocation
 (IN invokeType varchar(15), IN caller varchar(255), IN callerMethod varchar(127), IN callerDesc text, IN target varchar(255), IN targetMethod varchar(127), IN targetDesc text, IN version varchar(15))
 BEGIN
