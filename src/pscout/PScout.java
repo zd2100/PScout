@@ -85,7 +85,7 @@ public class PScout {
 			int step = Integer.parseInt(args[0]);
 			
 			PScout pscout = new PScout();
-			/*
+			
 			switch(step){
 				case 1:
 					LOGGER.log(Level.INFO, Statistics.getTime() + "\tExtracting Jars...");
@@ -105,12 +105,10 @@ public class PScout {
 					default:
 						break;
 			}
-			*/
-			pscout.extractJars();
-			pscout.buildClassHierarchyCallGraph();
-			pscout.analyzeInvocations();
 			
 			pscout.shutdown();
+		}else{
+			System.out.println("Usage: Pscout <step>\n Steps: 1 - extract jar   2 - build class hierarchy & call graph    3 - analyze permission invocations\n");
 		}
 	}
 }
