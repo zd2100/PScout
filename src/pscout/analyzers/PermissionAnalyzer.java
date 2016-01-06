@@ -82,7 +82,14 @@ public class PermissionAnalyzer {
 		// END FOR LOOP
 	}
 
-	
+	/**
+	 * 
+	 * @param cls
+	 * @param method
+	 * @param insnIndex
+	 * @return
+	 * @throws Exception
+	 */
 	private Object findPermissionString(ClassNode cls, MethodNode method, int insnIndex) throws Exception {
 		AbstractInsnNode insn = method.instructions.get(insnIndex);
 		

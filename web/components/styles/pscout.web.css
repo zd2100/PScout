@@ -127,22 +127,13 @@
 	text-decoration: underline;
 }
 
-.contact{
-	margin:10px;
-
-}
 
 .contact h3{
-	margin: 10px;
 	text-align: center;
 }
 
 .contact a{
 	color: #67809f;
-}
-
-.contact a:hover{
-	text-decoration: none;
 }
 
 .footer{

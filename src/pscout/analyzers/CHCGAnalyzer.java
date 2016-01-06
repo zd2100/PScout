@@ -141,6 +141,13 @@ public class CHCGAnalyzer implements Runnable {
 		private final Class caller;
 		private final Method callerMethod;
 		
+		/**
+		 * The constructor
+		 * @param provider data provider
+		 * @param config configuration
+		 * @param caller calling class
+		 * @param callerMethod calling method
+		 */
 		public AsmMethodVisitor(IDataProvider provider, Config config, Class caller, Method callerMethod){
 			super(Opcodes.ASM5);
 			this.config = config;
