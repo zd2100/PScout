@@ -48,6 +48,6 @@
 	<a class="bold-underline" href="http://www.eecg.toronto.edu/%7Elie/papers/PScout-CCS2012-web.pdf">
 	PScout: Analyzing the Android Permission Specification</a>
 	. In the Proceedings of the 19th ACM Conference on Computer and Communications Security (CCS 2012). October 2012. &nbsp;[<a href="http://www.eecg.toronto.edu/%7Elie/papers/PScout-CCS2012-web.pdf">Full
-	Paper</a>] [<a href="PScout-CCS2012-slides.pdf">Presentation Slides</a>]
+	Paper</a>] [<a href="downloads/PScout-CCS2012-slides.pdf">Presentation Slides</a>]
 
 </div>

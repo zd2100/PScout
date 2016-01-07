@@ -34,7 +34,7 @@
 					<h3>Professor<h3>
 				</div>
 				<div class="col-md-2 contact">
-					<h3><a href="http://www.eecg.toronto.edu/%7Elie">David Lie</a></h3>
+					<h4><a href="http://www.eecg.toronto.edu/%7Elie">David Lie</a></h4>
 				</div>
 			</div>
 			<div class="col-md-12">
@@ -42,16 +42,16 @@
 					<h3>Members</h3>
 				</div>
 				<div class="col-md-2 contact">
-					<h3><a href="mailto:kathy.au@utoronto.ca">Kathy Au</a></h3>
+					<h4><a href="mailto:kathy.au@utoronto.ca">Kathy Au</a></h4>
 				</div>
 				<div class="col-md-2 contact">
-					<h3><a href="mailto:z.huang@utoronto.ca">James Huang</a></h3>
+					<h4><a href="mailto:z.huang@utoronto.ca">James Huang</a></h4>
 				</div>
 				<div class="col-md-2 contact">
-					<h3><a href="mailto:billy.zhou@utoronto.ca">Billy Zhou</a></h3>
+					<h4><a href="mailto:billy.zhou@utoronto.ca">Billy Zhou</a></h4>
 				</div>
 				<div class="col-md-2 contact">
-					<h3><a href="mailto:ding.zhu@mail.utoronto.ca">Ding Zhu</a></h3>
+					<h4><a href="mailto:ding.zhu@mail.utoronto.ca">Ding Zhu</a></h4>
 				</div>
 			</div>
 		</div>

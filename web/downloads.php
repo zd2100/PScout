@@ -23,9 +23,9 @@
 		<div class="row">
 			<div class="col-md-12">
 				<?php 
-				//	include("components/pscout1.php"); 
+					include("components/pscout1.php"); 
 					include("components/pscout2.php");
-				//	include("components/permission1.php"); 
+					include("components/permission1.php"); 
 					include("components/permission2.php");
 				?>
 			</div>

@@ -26,6 +26,10 @@
 				<td><a href="data/5.0.2/mapping_5.0.2.csv">Download</a></td>
 				<td><a href="data/5.1.1/mapping_5.1.1.csv">Download</a></td>
 			</tr>
+			<tr>
+				<td>Others</td>
+				<td colspan="7">Comming Soon</td>
+			</tr>
 		</tbody>
 	</table>
 </div>
