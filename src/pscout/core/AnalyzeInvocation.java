@@ -45,17 +45,7 @@ public class AnalyzeInvocation {
 	public AnalyzeInvocation(IDataProvider dataProvider, Config config){
 		this.dataProvider = dataProvider;
 		this.config = config;
-		this.threadPool = Executors.newFixedThreadPool(config.threads);
-		
-		try {
-			FileHandler fh = new FileHandler("C:\\log\\log%g.log", 1024 * 1024 * 10, 1000);
-			fh.setFormatter(new SimpleFormatter());
-			LOGGER.addHandler(fh);
-			LOGGER.setUseParentHandlers(false);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		
+		this.threadPool = Executors.newFixedThreadPool(config.threads);	
 	}
 	
 	public void analyze(){
@@ -173,7 +163,9 @@ public class AnalyzeInvocation {
 			try{
 				// skip analyzed invocation by other threads
 				if(this.hashSet.contains(this.scope.invocation.callerClass + this.scope.invocation.callerMethod + this.scope.invocation.callerMethodDesc)){
-					return;
+					if(dataProvider.hasScope(scope)){
+						return;
+					}
 				}
 				
 				LOGGER.log(Level.INFO, "Analyzing: " + this.scope.invocation);

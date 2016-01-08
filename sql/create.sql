@@ -196,18 +196,3 @@ SELECT p.*
 FROM vwPermissionInvocation p
 WHERE EXISTS (SELECT 1 FROM vwPublicMethods pm WHERE p.CallerClass = pm.ClassName AND p.CallerMethod = pm.MethodName AND p.CallerMethodDesc = pm.Descriptor AND p.Version = pm.Version)
 );
-
-
-DROP PROCEDURE IF EXISTS spAddInvocation;
-DELIMITER $$
-CREATE PROCEDURE spAddInvocation
-(IN invokeType varchar(15), IN caller varchar(255), IN callerMethod varchar(127), IN callerDesc text, IN target varchar(255), IN targetMethod varchar(127), IN targetDesc text, IN version varchar(15))
-BEGIN
-
-	INSERT INTO Invocations (InvokeType, CallerClass, CallerMethod, CallerMethodDesc, TargetClass, TargetMethod, TargetMethodDesc, Version) 
-		SELECT invokeType, caller, callerMethod, callerDesc, target, targetMethod, targetDesc, version FROM (SELECT 1) temp 
-    WHERE NOT EXISTS 
-		(SELECT ID FROM Invocations WHERE InvokeType = invokeType AND CallerClass = caller AND CallerMethod = callerMethod AND CallerMethodDesc = callerDesc AND TargetClass = target AND TargetMethod = targetMethod AND TargetMethodDesc = targetDesc AND Version = verion);
-        
-END
-$$

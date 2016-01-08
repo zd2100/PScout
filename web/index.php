@@ -12,6 +12,7 @@
 	<link rel="stylesheet" href="components/styles/pscout.web.css" >
   </head>
   <body>
+  <?php include_once("components/analyticstracking.php") ?>
     <?php 
 		$section = "home";
 		include('components/header.php'); 

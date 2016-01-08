@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>PScout</title>
+    <title>PScout - Downloads</title>
 
     <!-- Bootstrap -->
     <!-- Latest compiled and minified CSS -->
@@ -14,6 +14,7 @@
    
   </head>
   <body>
+  <?php include_once("components/analyticstracking.php") ?>
     <?php 
 		$section = "downloads";
 		include('components/header.php'); 
