@@ -10,6 +10,7 @@ import org.sql2o.Sql2o;
 import com.google.inject.Inject;
 import com.mchange.v2.c3p0.ComboPooledDataSource;
 
+import pscout.models.AnalyzeScope;
 import pscout.models.Class;
 import pscout.models.Config;
 import pscout.models.Invocation;
@@ -190,6 +191,25 @@ public class MySqlDataProvider implements IDataProvider {
 			LOGGER.log(Level.SEVERE, e.getMessage(), e);
 		}
 		return null;
+	}
+	
+	@Override
+	public boolean hasScope(AnalyzeScope scope){
+		final String sql = "SELECT 1 FROM PermissionInvocations WHERE InvocationId = :id AND Permission = :permission";
+		try(Connection con = this.getConnection()){
+			for(String permission : scope.permissions){
+				List<Integer> result = con.createQuery(sql)
+					.addParameter("id", scope.invocation.id)
+					.addParameter("permission", permission)
+					.executeAndFetch(Integer.class);
+				if(result == null || result.size() == 0){
+					return false;
+				}
+			}
+		}catch(Exception e){
+			LOGGER.log(Level.SEVERE, e.getMessage(), e);
+		}
+		return true;
 	}
 	
 	@Override

@@ -1,0 +1,6 @@
+pscout
+pscout.analyzers
+pscout.core
+pscout.db
+pscout.models
+pscout.util

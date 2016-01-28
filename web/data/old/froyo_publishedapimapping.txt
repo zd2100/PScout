@@ -1,0 +1,567 @@
+Permission:android.permission.CHANGE_WIFI_STATE
+12 Callers:
+<android.net.wifi.WifiManager: boolean reassociate()>
+<android.net.wifi.WifiManager: boolean removeNetwork(int)>
+<android.net.wifi.WifiManager: boolean startScan()>
+<android.net.wifi.WifiManager: boolean reconnect()>
+<android.net.wifi.WifiManager: int addNetwork(android.net.wifi.WifiConfiguration)>
+<android.net.wifi.WifiManager: boolean pingSupplicant()>
+<android.net.wifi.WifiManager: boolean enableNetwork(int,boolean)>
+<android.net.wifi.WifiManager: boolean disconnect()>
+<android.net.wifi.WifiManager: boolean setWifiEnabled(boolean)>
+<android.net.wifi.WifiManager: boolean saveConfiguration()>
+<android.net.wifi.WifiManager: boolean disableNetwork(int)>
+<android.net.wifi.WifiManager: int updateNetwork(android.net.wifi.WifiConfiguration)>
+Permission:android.permission.READ_PHONE_STATE
+8 Callers:
+<android.telephony.TelephonyManager: java.lang.String getSubscriberId()>
+<android.telephony.TelephonyManager: java.lang.String getDeviceSoftwareVersion()>
+<android.telephony.TelephonyManager: void listen(android.telephony.PhoneStateListener,int)>
+<android.telephony.TelephonyManager: java.lang.String getLine1Number()>
+<android.telephony.TelephonyManager: java.lang.String getSimSerialNumber()>
+<android.telephony.TelephonyManager: java.lang.String getVoiceMailAlphaTag()>
+<android.telephony.TelephonyManager: java.lang.String getVoiceMailNumber()>
+<android.telephony.TelephonyManager: java.lang.String getDeviceId()>
+Permission:android.permission.WRITE_CONTACTS
+13 Callers:
+<android.provider.ContactsContract$Contacts: void markAsContacted(android.content.ContentResolver,long)>
+<android.provider.Contacts$People: void markAsContacted(android.content.ContentResolver,long)>
+<android.provider.Contacts$ContactMethods: void addPostalLocation(android.content.Context,long,double,double)>
+<android.provider.ContactsContract$Contacts: android.net.Uri getLookupUri(long,java.lang.String)>
+<android.provider.ContactsContract$SyncState: void set(android.content.ContentProviderClient,android.accounts.Account,byte[])>
+<android.provider.Contacts$People: android.net.Uri addToGroup(android.content.ContentResolver,long,long)>
+<android.provider.ContactsContract$RawContacts: android.net.Uri getContactLookupUri(android.content.ContentResolver,android.net.Uri)>
+<android.provider.Contacts$People: android.net.Uri addToGroup(android.content.ContentResolver,long,java.lang.String)>
+<android.provider.Contacts$People: android.net.Uri createPersonInMyContactsGroup(android.content.ContentResolver,android.content.ContentValues)>
+<android.provider.Contacts$People: android.net.Uri addToMyContactsGroup(android.content.ContentResolver,long)>
+<android.provider.ContactsContract$SyncState: android.content.ContentProviderOperation newSetOperation(android.accounts.Account,byte[])>
+<android.provider.Contacts$Settings: void setSetting(android.content.ContentResolver,java.lang.String,java.lang.String,java.lang.String)>
+<android.provider.ContactsContract$Contacts: android.net.Uri getLookupUri(android.content.ContentResolver,android.net.Uri)>
+Permission:android.permission.GET_TASKS
+2 Callers:
+<android.app.ActivityManager: java.util.List getRecentTasks(int,int)>
+<android.app.ActivityManager: java.util.List getRunningTasks(int)>
+Permission:android.permission.CHANGE_WIFI_MULTICAST_STATE
+2 Callers:
+<android.net.wifi.WifiManager$MulticastLock: void release()>
+<android.net.wifi.WifiManager$MulticastLock: void acquire()>
+Permission:android.permission.ACCESS_WIFI_STATE
+6 Callers:
+<android.net.wifi.WifiManager: java.util.List getScanResults()>
+<android.net.wifi.WifiManager: android.net.DhcpInfo getDhcpInfo()>
+<android.net.wifi.WifiManager: boolean isWifiEnabled()>
+<android.net.wifi.WifiManager: android.net.wifi.WifiInfo getConnectionInfo()>
+<android.net.wifi.WifiManager: int getWifiState()>
+<android.net.wifi.WifiManager: java.util.List getConfiguredNetworks()>
+Permission:android.permission.SEND_SMS
+6 Callers:
+<android.telephony.gsm.SmsManager: void sendTextMessage(java.lang.String,java.lang.String,java.lang.String,android.app.PendingIntent,android.app.PendingIntent)>
+<android.telephony.SmsManager: void sendMultipartTextMessage(java.lang.String,java.lang.String,java.util.ArrayList,java.util.ArrayList,java.util.ArrayList)>
+<android.telephony.gsm.SmsManager: void sendDataMessage(java.lang.String,java.lang.String,short,byte[],android.app.PendingIntent,android.app.PendingIntent)>
+<android.telephony.SmsManager: void sendTextMessage(java.lang.String,java.lang.String,java.lang.String,android.app.PendingIntent,android.app.PendingIntent)>
+<android.telephony.gsm.SmsManager: void sendMultipartTextMessage(java.lang.String,java.lang.String,java.util.ArrayList,java.util.ArrayList,java.util.ArrayList)>
+<android.telephony.SmsManager: void sendDataMessage(java.lang.String,java.lang.String,short,byte[],android.app.PendingIntent,android.app.PendingIntent)>
+Permission:android.permission.ACCESS_MOCK_LOCATION
+8 Callers:
+<android.location.LocationManager: void clearTestProviderLocation(java.lang.String)>
+<android.location.LocationManager: void clearTestProviderEnabled(java.lang.String)>
+<android.location.LocationManager: void addTestProvider(java.lang.String,boolean,boolean,boolean,boolean,boolean,boolean,boolean,int,int)>
+<android.location.LocationManager: void setTestProviderLocation(java.lang.String,android.location.Location)>
+<android.location.LocationManager: void removeTestProvider(java.lang.String)>
+<android.location.LocationManager: void setTestProviderEnabled(java.lang.String,boolean)>
+<android.location.LocationManager: void clearTestProviderStatus(java.lang.String)>
+<android.location.LocationManager: void setTestProviderStatus(java.lang.String,int,android.os.Bundle,long)>
+Permission:android.permission.READ_LOGS
+1 Callers:
+<android.os.DropBoxManager: android.os.DropBoxManager$Entry getNextEntry(java.lang.String,long)>
+Permission:android.permission.BLUETOOTH_ADMIN
+8 Callers:
+<android.media.AudioManager: void setMode(int)>
+<android.bluetooth.BluetoothAdapter: boolean enable()>
+<android.media.AudioManager: void startBluetoothSco()>
+<android.media.AudioManager: void stopBluetoothSco()>
+<android.bluetooth.BluetoothAdapter: boolean setName(java.lang.String)>
+<android.bluetooth.BluetoothAdapter: boolean startDiscovery()>
+<android.bluetooth.BluetoothAdapter: boolean disable()>
+<android.bluetooth.BluetoothAdapter: boolean cancelDiscovery()>
+Permission:android.permission.VIBRATE
+5 Callers:
+<android.app.NotificationManager: void notify(int,android.app.Notification)>
+<android.app.NotificationManager: void notify(java.lang.String,int,android.app.Notification)>
+<android.os.Vibrator: void vibrate(long[],int)>
+<android.os.Vibrator: void cancel()>
+<android.os.Vibrator: void vibrate(long)>
+Permission:android.permission.MODIFY_AUDIO_SETTINGS
+9 Callers:
+<android.media.AudioManager: void setMode(int)>
+<android.media.AudioManager: boolean isWiredHeadsetOn()>
+<android.media.AudioManager: void startBluetoothSco()>
+<android.media.AudioManager: void setSpeakerphoneOn(boolean)>
+<android.media.AudioManager: void setBluetoothScoOn(boolean)>
+<android.media.AudioManager: void stopBluetoothSco()>
+<android.media.AudioManager: void setParameters(java.lang.String)>
+<android.media.AudioManager: boolean isBluetoothA2dpOn()>
+<android.media.AudioManager: void setMicrophoneMute(boolean)>
+Permission:android.permission.RESTART_PACKAGES
+2 Callers:
+<android.app.ActivityManager: void restartPackage(java.lang.String)>
+<android.app.ActivityManager: void killBackgroundProcesses(java.lang.String)>
+Permission:android.permission.ACCESS_COARSE_LOCATION
+14 Callers:
+<android.telephony.TelephonyManager: java.util.List getNeighboringCellInfo()>
+<android.telephony.TelephonyManager: android.telephony.CellLocation getCellLocation()>
+<android.telephony.TelephonyManager: void listen(android.telephony.PhoneStateListener,int)>
+<android.location.LocationManager: java.util.List getProviders(android.location.Criteria,boolean)>
+<android.location.LocationManager: java.util.List getProviders(boolean)>
+<android.location.LocationManager: android.location.LocationProvider getProvider(java.lang.String)>
+<android.location.LocationManager: void requestLocationUpdates(java.lang.String,long,float,android.app.PendingIntent)>
+<android.location.LocationManager: boolean sendExtraCommand(java.lang.String,java.lang.String,android.os.Bundle)>
+<android.location.LocationManager: android.location.Location getLastKnownLocation(java.lang.String)>
+<android.location.LocationManager: void requestLocationUpdates(java.lang.String,long,float,android.location.LocationListener)>
+<android.location.LocationManager: boolean isProviderEnabled(java.lang.String)>
+<android.location.LocationManager: void addProximityAlert(double,double,float,long,android.app.PendingIntent)>
+<android.location.LocationManager: java.lang.String getBestProvider(android.location.Criteria,boolean)>
+<android.location.LocationManager: void requestLocationUpdates(java.lang.String,long,float,android.location.LocationListener,android.os.Looper)>
+Permission:android.permission.CHANGE_NETWORK_STATE
+4 Callers:
+<android.net.ConnectivityManager: void setNetworkPreference(int)>
+<android.net.ConnectivityManager: int stopUsingNetworkFeature(int,java.lang.String)>
+<android.net.ConnectivityManager: int startUsingNetworkFeature(int,java.lang.String)>
+<android.net.ConnectivityManager: boolean requestRouteToHost(int,int)>
+Permission:com.android.browser.permission.READ_HISTORY_BOOKMARKS
+17 Callers:
+<android.provider.Browser: void deleteFromHistory(android.content.ContentResolver,java.lang.String)>
+<android.provider.Browser: android.database.Cursor getAllVisitedUrls(android.content.ContentResolver)>
+<android.provider.Browser: void updateVisitedHistory(android.content.ContentResolver,java.lang.String,boolean)>
+<android.provider.Browser: void truncateHistory(android.content.ContentResolver)>
+<android.provider.Browser: void requestAllIcons(android.content.ContentResolver,java.lang.String,android.webkit.WebIconDatabase$IconListener)>
+<android.provider.Browser: void clearSearches(android.content.ContentResolver)>
+<android.provider.Browser: android.database.Cursor getAllBookmarks(android.content.ContentResolver)>
+<android.webkit.WebIconDatabase: void removeAllIcons()>
+<android.provider.Browser: void deleteHistoryTimeFrame(android.content.ContentResolver,long,long)>
+<android.provider.Browser: void addSearchUrl(android.content.ContentResolver,java.lang.String)>
+<android.provider.Browser: boolean canClearHistory(android.content.ContentResolver)>
+<android.webkit.WebIconDatabase: void releaseIconForPageUrl(java.lang.String)>
+<android.webkit.WebIconDatabase: void close()>
+<android.webkit.WebIconDatabase: void requestIconForPageUrl(java.lang.String,android.webkit.WebIconDatabase$IconListener)>
+<android.webkit.WebIconDatabase: void open(java.lang.String)>
+<android.webkit.WebIconDatabase: void retainIconForPageUrl(java.lang.String)>
+<android.provider.Browser: void clearHistory(android.content.ContentResolver)>
+Permission:android.permission.READ_USER_DICTIONARY
+1 Callers:
+<android.inputmethodservice.KeyboardView: void swipeDown()>
+Permission:android.permission.PERSISTENT_ACTIVITY
+1 Callers:
+<android.app.Activity: void setPersistent(boolean)>
+Permission:android.permission.WRITE_SETTINGS
+15 Callers:
+<android.media.RingtoneManager: void setActualDefaultRingtoneUri(android.content.Context,int,android.net.Uri)>
+<android.provider.Settings$Secure: boolean putFloat(android.content.ContentResolver,java.lang.String,float)>
+<android.provider.Settings$System: android.net.Uri getUriFor(java.lang.String)>
+<android.provider.Settings$System: boolean putInt(android.content.ContentResolver,java.lang.String,int)>
+<android.provider.Settings$Secure: boolean putString(android.content.ContentResolver,java.lang.String,java.lang.String)>
+<android.provider.Settings$System: void setShowGTalkServiceStatus(android.content.ContentResolver,boolean)>
+<android.provider.Settings$Secure: boolean putLong(android.content.ContentResolver,java.lang.String,long)>
+<android.provider.Settings$System: boolean putLong(android.content.ContentResolver,java.lang.String,long)>
+<android.provider.Settings$Secure: android.net.Uri getUriFor(java.lang.String)>
+<android.provider.Settings$System: boolean putFloat(android.content.ContentResolver,java.lang.String,float)>
+<android.provider.Settings$System: boolean putString(android.content.ContentResolver,java.lang.String,java.lang.String)>
+<android.net.ConnectivityManager: void setNetworkPreference(int)>
+<android.provider.Settings$System: boolean putConfiguration(android.content.ContentResolver,android.content.res.Configuration)>
+<android.provider.Settings$Secure: boolean putInt(android.content.ContentResolver,java.lang.String,int)>
+<android.provider.Settings$Secure: void setLocationProviderEnabled(android.content.ContentResolver,java.lang.String,boolean)>
+Permission:android.permission.CAMERA
+2 Callers:
+<android.media.MediaRecorder: void setVideoSource(int)>
+<android.hardware.Camera: android.hardware.Camera open()>
+Permission:android.permission.WRITE_USER_DICTIONARY
+1 Callers:
+<android.inputmethodservice.KeyboardView: void swipeDown()>
+Permission:android.permission.AUTHENTICATE_ACCOUNTS
+7 Callers:
+<android.accounts.AccountManager: void setUserData(android.accounts.Account,java.lang.String,java.lang.String)>
+<android.accounts.AccountManager: void setPassword(android.accounts.Account,java.lang.String)>
+<android.accounts.AccountManager: java.lang.String getPassword(android.accounts.Account)>
+<android.accounts.AccountManager: boolean addAccountExplicitly(android.accounts.Account,java.lang.String,android.os.Bundle)>
+<android.accounts.AccountManager: java.lang.String peekAuthToken(android.accounts.Account,java.lang.String)>
+<android.accounts.AccountManager: java.lang.String getUserData(android.accounts.Account,java.lang.String)>
+<android.accounts.AccountManager: void setAuthToken(android.accounts.Account,java.lang.String,java.lang.String)>
+Permission:android.permission.MODIFY_PHONE_STATE
+3 Callers:
+<android.net.ConnectivityManager: void setNetworkPreference(int)>
+<android.net.ConnectivityManager: int stopUsingNetworkFeature(int,java.lang.String)>
+<android.net.ConnectivityManager: int startUsingNetworkFeature(int,java.lang.String)>
+Permission:android.permission.INTERNET
+17 Callers:
+<android.webkit.WebSettings: void setBlockNetworkLoads(boolean)>
+<java.net.ServerSocket: void bind(java.net.SocketAddress)>
+<java.net.URL: java.io.InputStream openStream()>
+<android.webkit.WebView: void <init>(android.content.Context)>
+<java.net.URL: java.net.URLConnection openConnection()>
+<java.net.Socket: void <init>(int)>
+<java.net.MulticastSocket: void <init>(int)>
+<java.net.URL: java.lang.Object getContent()>
+<java.net.URLConnection: java.io.InputStream getInputStream()>
+<java.net.HttpURLConnection: void <init>(int)>
+<java.net.ServerSocket: void <init>(int)>
+<android.webkit.WebView: void <init>(android.content.Context,android.util.AttributeSet,int)>
+<org.apache.http.impl.client.DefaultHttpClient: void <init>(int)>
+<java.net.DatagramSocket: void <init>(int)>
+<android.webkit.WebView: void <init>(android.content.Context,android.util.AttributeSet,int,java.util.Map)>
+<android.webkit.WebView: void <init>(android.content.Context,android.util.AttributeSet)>
+<java.net.URLConnection: void connect()>
+Permission:android.permission.SET_WALLPAPER
+10 Callers:
+<android.content.ContextWrapper: void setWallpaper(android.graphics.Bitmap)>
+<android.app.WallpaperManager: void setBitmap(android.graphics.Bitmap)>
+<android.content.ContextWrapper: void clearWallpaper()>
+<android.app.WallpaperManager: void setStream(java.io.InputStream)>
+<android.app.WallpaperManager: void clear()>
+<android.content.Context: void setWallpaper(android.graphics.Bitmap)>
+<android.content.Context: void setWallpaper(java.io.InputStream)>
+<android.content.Context: void clearWallpaper()>
+<android.content.ContextWrapper: void setWallpaper(java.io.InputStream)>
+<android.app.WallpaperManager: void setResource(int)>
+Permission:com.android.browser.permission.WRITE_HISTORY_BOOKMARKS
+7 Callers:
+<android.provider.Browser: void truncateHistory(android.content.ContentResolver)>
+<android.provider.Browser: void deleteFromHistory(android.content.ContentResolver,java.lang.String)>
+<android.provider.Browser: void addSearchUrl(android.content.ContentResolver,java.lang.String)>
+<android.provider.Browser: void clearSearches(android.content.ContentResolver)>
+<android.provider.Browser: void clearHistory(android.content.ContentResolver)>
+<android.provider.Browser: void updateVisitedHistory(android.content.ContentResolver,java.lang.String,boolean)>
+<android.provider.Browser: void deleteHistoryTimeFrame(android.content.ContentResolver,long,long)>
+Permission:android.permission.DISABLE_KEYGUARD
+3 Callers:
+<android.app.KeyguardManager$KeyguardLock: void reenableKeyguard()>
+<android.app.KeyguardManager$KeyguardLock: void disableKeyguard()>
+<android.app.KeyguardManager: void exitKeyguardSecurely(android.app.KeyguardManager$OnKeyguardExitResult)>
+Permission:android.permission.ACCESS_NETWORK_STATE
+54 Callers:
+<android.provider.Browser: void deleteFromHistory(android.content.ContentResolver,java.lang.String)>
+<android.provider.Browser: android.database.Cursor getAllVisitedUrls(android.content.ContentResolver)>
+<android.webkit.WebView: void loadDataWithBaseURL(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)>
+<android.webkit.WebView: void goForward()>
+<android.webkit.WebView: void pauseTimers()>
+<android.net.ConnectivityManager: android.net.NetworkInfo getNetworkInfo(int)>
+<android.provider.Browser: void updateVisitedHistory(android.content.ContentResolver,java.lang.String,boolean)>
+<android.provider.Browser: void truncateHistory(android.content.ContentResolver)>
+<android.webkit.WebView: void loadUrl(java.lang.String,java.util.Map)>
+<android.net.ConnectivityManager: int startUsingNetworkFeature(int,java.lang.String)>
+<android.webkit.WebView: void reload()>
+<android.webkit.WebIconDatabase: void removeAllIcons()>
+<android.webkit.WebView: void stopLoading()>
+<android.provider.Browser: void deleteHistoryTimeFrame(android.content.ContentResolver,long,long)>
+<android.webkit.WebView: void goBackOrForward(int)>
+<android.webkit.WebView: void documentHasImages(android.os.Message)>
+<android.provider.Browser: void addSearchUrl(android.content.ContentResolver,java.lang.String)>
+<android.webkit.WebView: void freeMemory()>
+<android.provider.Browser: boolean canClearHistory(android.content.ContentResolver)>
+<android.webkit.WebView: boolean zoomOut()>
+<android.webkit.HttpAuthHandler: void cancel()>
+<android.webkit.WebView: void clearView()>
+<android.webkit.WebView: void clearCache(boolean)>
+<android.webkit.WebView: void loadData(java.lang.String,java.lang.String,java.lang.String)>
+<android.provider.Browser: void clearHistory(android.content.ContentResolver)>
+<android.webkit.WebView: void enablePlatformNotifications()>
+<android.webkit.WebView: void destroy()>
+<android.webkit.WebView: android.webkit.WebBackForwardList restoreState(android.os.Bundle)>
+<android.webkit.WebViewClient: void onReceivedHttpAuthRequest(android.webkit.WebView,android.webkit.HttpAuthHandler,java.lang.String,java.lang.String)>
+<android.webkit.HttpAuthHandler: void proceed(java.lang.String,java.lang.String)>
+<android.webkit.WebView: void goBack()>
+<android.webkit.WebView: void clearHistory()>
+<android.webkit.WebView: void invokeZoomPicker()>
+<android.webkit.WebView: void setNetworkAvailable(boolean)>
+<android.net.ConnectivityManager: int getNetworkPreference()>
+<android.webkit.WebView: void postUrl(java.lang.String,byte[])>
+<android.webkit.WebView: boolean zoomIn()>
+<android.webkit.WebView: void clearSslPreferences()>
+<android.provider.Browser: void requestAllIcons(android.content.ContentResolver,java.lang.String,android.webkit.WebIconDatabase$IconListener)>
+<android.webkit.WebSettings: void setDefaultZoom(android.webkit.WebSettings$ZoomDensity)>
+<android.provider.Browser: android.database.Cursor getAllBookmarks(android.content.ContentResolver)>
+<android.webkit.WebView: void goBackOrForward(int,boolean)>
+<android.webkit.WebView: void addJavascriptInterface(java.lang.Object,java.lang.String)>
+<android.webkit.WebView: void loadUrl(java.lang.String)>
+<android.webkit.WebView: void requestFocusNodeHref(android.os.Message)>
+<android.webkit.WebView: void resumeTimers()>
+<android.webkit.WebIconDatabase: void releaseIconForPageUrl(java.lang.String)>
+<android.webkit.WebIconDatabase: void requestIconForPageUrl(java.lang.String,android.webkit.WebIconDatabase$IconListener)>
+<android.webkit.WebIconDatabase: void close()>
+<android.webkit.WebIconDatabase: void retainIconForPageUrl(java.lang.String)>
+<android.webkit.WebIconDatabase: void open(java.lang.String)>
+<android.net.ConnectivityManager: android.net.NetworkInfo getActiveNetworkInfo()>
+<android.net.ConnectivityManager: android.net.NetworkInfo[] getAllNetworkInfo()>
+<android.webkit.WebView: void debugDump()>
+Permission:android.permission.GET_ACCOUNTS
+15 Callers:
+<android.accounts.AccountManager: android.accounts.AccountManagerFuture editProperties(java.lang.String,android.app.Activity,android.accounts.AccountManagerCallback,android.os.Handler)>
+<android.accounts.AccountManager: android.accounts.AccountManagerFuture confirmCredentials(android.accounts.Account,android.os.Bundle,android.app.Activity,android.accounts.AccountManagerCallback,android.os.Handler)>
+<android.accounts.AccountManager: android.accounts.AccountManagerFuture removeAccount(android.accounts.Account,android.accounts.AccountManagerCallback,android.os.Handler)>
+<android.accounts.AccountManager: android.accounts.AccountManagerFuture getAuthToken(android.accounts.Account,java.lang.String,android.os.Bundle,android.app.Activity,android.accounts.AccountManagerCallback,android.os.Handler)>
+<android.accounts.AccountManager: android.accounts.Account[] getAccountsByType(java.lang.String)>
+<android.accounts.AccountManager: android.accounts.AccountManagerFuture getAuthTokenByFeatures(java.lang.String,java.lang.String,java.lang.String[],android.app.Activity,android.os.Bundle,android.os.Bundle,android.accounts.AccountManagerCallback,android.os.Handler)>
+<android.accounts.AccountManager: android.accounts.AccountManagerFuture addAccount(java.lang.String,java.lang.String,java.lang.String[],android.os.Bundle,android.app.Activity,android.accounts.AccountManagerCallback,android.os.Handler)>
+<android.accounts.AccountManager: android.accounts.AccountManagerFuture getAuthToken(android.accounts.Account,java.lang.String,boolean,android.accounts.AccountManagerCallback,android.os.Handler)>
+<android.accounts.AccountManager: android.accounts.AccountManagerFuture updateCredentials(android.accounts.Account,java.lang.String,android.os.Bundle,android.app.Activity,android.accounts.AccountManagerCallback,android.os.Handler)>
+<android.accounts.AccountManager: android.accounts.Account[] getAccounts()>
+<android.accounts.AccountManager: android.accounts.AccountManagerFuture getAccountsByTypeAndFeatures(java.lang.String,java.lang.String[],android.accounts.AccountManagerCallback,android.os.Handler)>
+<android.accounts.AccountManager: java.lang.String blockingGetAuthToken(android.accounts.Account,java.lang.String,boolean)>
+<android.accounts.AccountManager: void addOnAccountsUpdatedListener(android.accounts.OnAccountsUpdateListener,android.os.Handler,boolean)>
+<android.accounts.AccountManager: android.accounts.AccountManagerFuture hasFeatures(android.accounts.Account,java.lang.String[],android.accounts.AccountManagerCallback,android.os.Handler)>
+<android.app.KeyguardManager: void exitKeyguardSecurely(android.app.KeyguardManager$OnKeyguardExitResult)>
+Permission:android.permission.READ_SYNC_STATS
+4 Callers:
+<android.content.ContentResolver: android.content.SyncInfo getCurrentSync()>
+<android.test.SyncBaseInstrumentation: void syncProvider(android.net.Uri,java.lang.String,java.lang.String)>
+<android.content.ContentResolver: boolean isSyncPending(android.accounts.Account,java.lang.String)>
+<android.content.ContentResolver: boolean isSyncActive(android.accounts.Account,java.lang.String)>
+Permission:android.permission.ACCESS_FINE_LOCATION
+15 Callers:
+<android.telephony.TelephonyManager: java.util.List getNeighboringCellInfo()>
+<android.telephony.TelephonyManager: android.telephony.CellLocation getCellLocation()>
+<android.location.LocationManager: java.util.List getProviders(android.location.Criteria,boolean)>
+<android.location.LocationManager: java.util.List getProviders(boolean)>
+<android.location.LocationManager: android.location.LocationProvider getProvider(java.lang.String)>
+<android.location.LocationManager: void requestLocationUpdates(java.lang.String,long,float,android.app.PendingIntent)>
+<android.location.LocationManager: boolean sendExtraCommand(java.lang.String,java.lang.String,android.os.Bundle)>
+<android.location.LocationManager: boolean addNmeaListener(android.location.GpsStatus$NmeaListener)>
+<android.location.LocationManager: android.location.Location getLastKnownLocation(java.lang.String)>
+<android.location.LocationManager: boolean addGpsStatusListener(android.location.GpsStatus$Listener)>
+<android.location.LocationManager: boolean isProviderEnabled(java.lang.String)>
+<android.location.LocationManager: void addProximityAlert(double,double,float,long,android.app.PendingIntent)>
+<android.location.LocationManager: void requestLocationUpdates(java.lang.String,long,float,android.location.LocationListener)>
+<android.location.LocationManager: java.lang.String getBestProvider(android.location.Criteria,boolean)>
+<android.location.LocationManager: void requestLocationUpdates(java.lang.String,long,float,android.location.LocationListener,android.os.Looper)>
+Permission:android.permission.USE_CREDENTIALS
+10 Callers:
+<android.accounts.AccountManager: android.accounts.AccountManagerFuture editProperties(java.lang.String,android.app.Activity,android.accounts.AccountManagerCallback,android.os.Handler)>
+<android.accounts.AccountManager: android.accounts.AccountManagerFuture confirmCredentials(android.accounts.Account,android.os.Bundle,android.app.Activity,android.accounts.AccountManagerCallback,android.os.Handler)>
+<android.accounts.AccountManager: android.accounts.AccountManagerFuture getAuthToken(android.accounts.Account,java.lang.String,android.os.Bundle,android.app.Activity,android.accounts.AccountManagerCallback,android.os.Handler)>
+<android.accounts.AccountManager: android.accounts.AccountManagerFuture getAuthTokenByFeatures(java.lang.String,java.lang.String,java.lang.String[],android.app.Activity,android.os.Bundle,android.os.Bundle,android.accounts.AccountManagerCallback,android.os.Handler)>
+<android.accounts.AccountManager: android.accounts.AccountManagerFuture addAccount(java.lang.String,java.lang.String,java.lang.String[],android.os.Bundle,android.app.Activity,android.accounts.AccountManagerCallback,android.os.Handler)>
+<android.accounts.AccountManager: android.accounts.AccountManagerFuture getAuthToken(android.accounts.Account,java.lang.String,boolean,android.accounts.AccountManagerCallback,android.os.Handler)>
+<android.accounts.AccountManager: android.accounts.AccountManagerFuture updateCredentials(android.accounts.Account,java.lang.String,android.os.Bundle,android.app.Activity,android.accounts.AccountManagerCallback,android.os.Handler)>
+<android.accounts.AccountManager: void invalidateAuthToken(java.lang.String,java.lang.String)>
+<android.accounts.AccountManager: java.lang.String blockingGetAuthToken(android.accounts.Account,java.lang.String,boolean)>
+<android.app.KeyguardManager: void exitKeyguardSecurely(android.app.KeyguardManager$OnKeyguardExitResult)>
+Permission:android.permission.SET_TIME_ZONE
+1 Callers:
+<android.app.AlarmManager: void setTimeZone(java.lang.String)>
+Permission:android.permission.WAKE_LOCK
+43 Callers:
+<android.media.AsyncPlayer: void stop()>
+<android.media.AudioManager: void startBluetoothSco()>
+<android.widget.VideoView: void resume()>
+<android.media.RingtoneManager: void stopPreviousRingtone()>
+<android.widget.VideoView: void setVideoURI(android.net.Uri,java.util.Map)>
+<android.media.RingtoneManager: android.media.Ringtone getRingtone(int)>
+<android.media.MediaPlayer: void stop()>
+<android.speech.tts.TextToSpeech: int speak(java.lang.String,int,java.util.HashMap)>
+<android.speech.tts.TextToSpeech: int synthesizeToFile(java.lang.String,java.util.HashMap,java.lang.String)>
+<android.media.AsyncPlayer: void play(android.content.Context,android.net.Uri,boolean,int)>
+<android.os.PowerManager$WakeLock: void release(int)>
+<android.widget.VideoView: void setVideoPath(java.lang.String)>
+<android.widget.VideoView: void stopPlayback()>
+<android.media.MediaPlayer: void start()>
+<android.speech.tts.TextToSpeech: int playSilence(long,int,java.util.HashMap)>
+<android.speech.tts.TextToSpeech: int playEarcon(java.lang.String,int,java.util.HashMap)>
+<android.telephony.gsm.SmsManager: void sendTextMessage(java.lang.String,java.lang.String,java.lang.String,android.app.PendingIntent,android.app.PendingIntent)>
+<android.telephony.SmsManager: void sendMultipartTextMessage(java.lang.String,java.lang.String,java.util.ArrayList,java.util.ArrayList,java.util.ArrayList)>
+<android.widget.VideoView: void suspend()>
+<android.widget.VideoView: void pause()>
+<android.media.AudioManager: void setMode(int)>
+<android.media.Ringtone: void stop()>
+<android.os.PowerManager$WakeLock: void acquire(long)>
+<android.telephony.gsm.SmsManager: void sendMultipartTextMessage(java.lang.String,java.lang.String,java.util.ArrayList,java.util.ArrayList,java.util.ArrayList)>
+<android.media.MediaPlayer: void setWakeMode(android.content.Context,int)>
+<android.telephony.SmsManager: void sendDataMessage(java.lang.String,java.lang.String,short,byte[],android.app.PendingIntent,android.app.PendingIntent)>
+<android.app.backup.BackupManager: int requestRestore(android.app.backup.RestoreObserver)>
+<android.os.PowerManager$WakeLock: void acquire()>
+<android.telephony.SmsManager: void sendTextMessage(java.lang.String,java.lang.String,java.lang.String,android.app.PendingIntent,android.app.PendingIntent)>
+<android.net.wifi.WifiManager$WifiLock: void release()>
+<android.net.wifi.WifiManager$WifiLock: void acquire()>
+<android.app.KeyguardManager: void exitKeyguardSecurely(android.app.KeyguardManager$OnKeyguardExitResult)>
+<android.widget.VideoView: void start()>
+<android.media.MediaPlayer: void pause()>
+<android.widget.VideoView: void setVideoURI(android.net.Uri)>
+<android.speech.tts.TextToSpeech: int stop()>
+<android.media.Ringtone: void play()>
+<android.os.Vibrator: void vibrate(long)>
+<android.media.MediaPlayer: void reset()>
+<android.media.AudioManager: void stopBluetoothSco()>
+<android.os.PowerManager$WakeLock: void release()>
+<android.telephony.gsm.SmsManager: void sendDataMessage(java.lang.String,java.lang.String,short,byte[],android.app.PendingIntent,android.app.PendingIntent)>
+<android.media.MediaPlayer: void release()>
+Permission:android.permission.READ_CONTACTS
+20 Callers:
+<android.provider.Contacts$People: void markAsContacted(android.content.ContentResolver,long)>
+<android.provider.Contacts$ContactMethods: void addPostalLocation(android.content.Context,long,double,double)>
+<android.widget.QuickContactBadge: void assignContactFromPhone(java.lang.String,boolean)>
+<android.provider.Contacts$People: android.database.Cursor queryGroups(android.content.ContentResolver,long)>
+<android.provider.ContactsContract$SyncState: void set(android.content.ContentProviderClient,android.accounts.Account,byte[])>
+<android.provider.ContactsContract$RawContacts: android.net.Uri getContactLookupUri(android.content.ContentResolver,android.net.Uri)>
+<android.provider.Contacts$People: android.net.Uri createPersonInMyContactsGroup(android.content.ContentResolver,android.content.ContentValues)>
+<android.provider.Contacts$People: android.net.Uri addToGroup(android.content.ContentResolver,long,java.lang.String)>
+<android.provider.Contacts$People: android.net.Uri addToMyContactsGroup(android.content.ContentResolver,long)>
+<android.provider.Contacts$Settings: void setSetting(android.content.ContentResolver,java.lang.String,java.lang.String,java.lang.String)>
+<android.provider.ContactsContract$SyncState: android.content.ContentProviderOperation newSetOperation(android.accounts.Account,byte[])>
+<android.provider.ContactsContract$SyncState: android.util.Pair getWithUri(android.content.ContentProviderClient,android.accounts.Account)>
+<android.provider.ContactsContract$Contacts: android.net.Uri getLookupUri(android.content.ContentResolver,android.net.Uri)>
+<android.provider.ContactsContract$Contacts: void markAsContacted(android.content.ContentResolver,long)>
+<android.widget.QuickContactBadge: void onClick(android.view.View)>
+<android.provider.ContactsContract$SyncState: byte[] get(android.content.ContentProviderClient,android.accounts.Account)>
+<android.widget.QuickContactBadge: void assignContactFromEmail(java.lang.String,boolean)>
+<android.provider.ContactsContract$Contacts: android.net.Uri getLookupUri(long,java.lang.String)>
+<android.provider.Contacts$Settings: java.lang.String getSetting(android.content.ContentResolver,java.lang.String,java.lang.String)>
+<android.provider.Contacts$People: android.net.Uri addToGroup(android.content.ContentResolver,long,long)>
+Permission:android.permission.SET_WALLPAPER_HINTS
+1 Callers:
+<android.app.WallpaperManager: void suggestDesiredDimensions(int,int)>
+Permission:android.permission.READ_SYNC_SETTINGS
+4 Callers:
+<android.content.ContentResolver: boolean getMasterSyncAutomatically()>
+<android.content.ContentResolver: java.util.List getPeriodicSyncs(android.accounts.Account,java.lang.String)>
+<android.content.ContentResolver: boolean getSyncAutomatically(android.accounts.Account,java.lang.String)>
+<android.content.ContentResolver: int getIsSyncable(android.accounts.Account,java.lang.String)>
+Permission:android.permission.MANAGE_ACCOUNTS
+14 Callers:
+<android.accounts.AccountManager: android.accounts.AccountManagerFuture editProperties(java.lang.String,android.app.Activity,android.accounts.AccountManagerCallback,android.os.Handler)>
+<android.accounts.AccountManager: android.accounts.AccountManagerFuture confirmCredentials(android.accounts.Account,android.os.Bundle,android.app.Activity,android.accounts.AccountManagerCallback,android.os.Handler)>
+<android.accounts.AccountManager: android.accounts.AccountManagerFuture removeAccount(android.accounts.Account,android.accounts.AccountManagerCallback,android.os.Handler)>
+<android.accounts.AccountManager: void clearPassword(android.accounts.Account)>
+<android.accounts.AccountManager: android.accounts.AccountManagerFuture getAuthToken(android.accounts.Account,java.lang.String,android.os.Bundle,android.app.Activity,android.accounts.AccountManagerCallback,android.os.Handler)>
+<android.accounts.AccountManager: android.accounts.AccountManagerFuture getAuthTokenByFeatures(java.lang.String,java.lang.String,java.lang.String[],android.app.Activity,android.os.Bundle,android.os.Bundle,android.accounts.AccountManagerCallback,android.os.Handler)>
+<android.accounts.AccountManager: android.accounts.AccountManagerFuture addAccount(java.lang.String,java.lang.String,java.lang.String[],android.os.Bundle,android.app.Activity,android.accounts.AccountManagerCallback,android.os.Handler)>
+<android.accounts.AccountManager: android.accounts.AccountManagerFuture getAuthToken(android.accounts.Account,java.lang.String,boolean,android.accounts.AccountManagerCallback,android.os.Handler)>
+<android.accounts.AccountManager: android.accounts.AccountManagerFuture updateCredentials(android.accounts.Account,java.lang.String,android.os.Bundle,android.app.Activity,android.accounts.AccountManagerCallback,android.os.Handler)>
+<android.accounts.AccountManager: void invalidateAuthToken(java.lang.String,java.lang.String)>
+<android.accounts.AccountManager: android.accounts.AccountManagerFuture getAccountsByTypeAndFeatures(java.lang.String,java.lang.String[],android.accounts.AccountManagerCallback,android.os.Handler)>
+<android.accounts.AccountManager: android.accounts.AccountManagerFuture hasFeatures(android.accounts.Account,java.lang.String[],android.accounts.AccountManagerCallback,android.os.Handler)>
+<android.accounts.AccountManager: java.lang.String blockingGetAuthToken(android.accounts.Account,java.lang.String,boolean)>
+<android.app.KeyguardManager: void exitKeyguardSecurely(android.app.KeyguardManager$OnKeyguardExitResult)>
+Permission:android.permission.WRITE_SYNC_SETTINGS
+6 Callers:
+<android.content.ContentResolver: void setMasterSyncAutomatically(boolean)>
+<android.test.SyncBaseInstrumentation: void cancelSyncsandDisableAutoSync()>
+<android.content.ContentResolver: void addPeriodicSync(android.accounts.Account,java.lang.String,android.os.Bundle,long)>
+<android.content.ContentResolver: void removePeriodicSync(android.accounts.Account,java.lang.String,android.os.Bundle)>
+<android.content.ContentResolver: void setSyncAutomatically(android.accounts.Account,java.lang.String,boolean)>
+<android.content.ContentResolver: void setIsSyncable(android.accounts.Account,java.lang.String,int)>
+Permission:android.permission.BROADCAST_STICKY
+6 Callers:
+<android.content.ContextWrapper: void removeStickyBroadcast(android.content.Intent)>
+<android.content.ContextWrapper: void sendStickyBroadcast(android.content.Intent)>
+<android.content.Context: void sendStickyBroadcast(android.content.Intent)>
+<android.content.ContextWrapper: void sendStickyOrderedBroadcast(android.content.Intent,android.content.BroadcastReceiver,android.os.Handler,int,java.lang.String,android.os.Bundle)>
+<android.content.Context: void sendStickyOrderedBroadcast(android.content.Intent,android.content.BroadcastReceiver,android.os.Handler,int,java.lang.String,android.os.Bundle)>
+<android.content.Context: void removeStickyBroadcast(android.content.Intent)>
+Permission:android.permission.ACCESS_LOCATION_EXTRA_COMMANDS
+1 Callers:
+<android.location.LocationManager: boolean sendExtraCommand(java.lang.String,java.lang.String,android.os.Bundle)>
+Permission:android.permission.RECEIVE_BOOT_COMPLETED
+71 Callers:
+<android.webkit.WebSyncManager: void run()>
+<android.webkit.WebView: void loadDataWithBaseURL(java.lang.String,java.lang.String,java.lang.String,java.lang.String,java.lang.String)>
+<android.webkit.SslErrorHandler: void proceed()>
+<android.webkit.WebView: void goForward()>
+<android.webkit.WebView: void pauseTimers()>
+<android.net.SSLCertificateSocketFactory: java.net.Socket createSocket(java.lang.String,int)>
+<android.widget.AbsListView: void onRestoreInstanceState(android.os.Parcelable)>
+<android.widget.AutoCompleteTextView: void performFiltering(java.lang.CharSequence,int)>
+<android.util.Log: int wtf(java.lang.String,java.lang.String,java.lang.Throwable)>
+<android.webkit.WebView: void reload()>
+<android.widget.QuickContactBadge: void <init>(android.content.Context,android.util.AttributeSet)>
+<android.webkit.WebView: void documentHasImages(android.os.Message)>
+<android.widget.QuickContactBadge: void <init>(android.content.Context)>
+<android.webkit.WebView: void freeMemory()>
+<android.webkit.WebView: boolean zoomOut()>
+<android.webkit.HttpAuthHandler: void cancel()>
+<android.webkit.WebView: void clearView()>
+<android.widget.Filter: void filter(java.lang.CharSequence)>
+<android.webkit.WebView: void <init>(android.content.Context,android.util.AttributeSet,int,java.util.Map)>
+<android.widget.Filter: void filter(java.lang.CharSequence,android.widget.Filter$FilterListener)>
+<android.net.SSLCertificateSocketFactory: java.net.Socket createSocket()>
+<android.content.AsyncQueryHandler: void <init>(android.content.ContentResolver)>
+<android.webkit.WebView: void destroy()>
+<android.webkit.WebView: android.webkit.WebBackForwardList restoreState(android.os.Bundle)>
+<android.webkit.WebViewClient: void onReceivedHttpAuthRequest(android.webkit.WebView,android.webkit.HttpAuthHandler,java.lang.String,java.lang.String)>
+<android.net.SSLCertificateSocketFactory: java.net.Socket createSocket(java.net.InetAddress,int)>
+<android.webkit.WebView: void goBack()>
+<android.net.SSLCertificateSocketFactory: java.net.Socket createSocket(java.net.Socket,java.lang.String,int,boolean)>
+<android.webkit.WebView: boolean zoomIn()>
+<android.app.backup.BackupManager: int requestRestore(android.app.backup.RestoreObserver)>
+<android.webkit.WebSettings: void setDefaultZoom(android.webkit.WebSettings$ZoomDensity)>
+<android.webkit.WebView: void goBackOrForward(int,boolean)>
+<android.widget.MultiAutoCompleteTextView: void performFiltering(java.lang.CharSequence,int)>
+<android.webkit.WebView: void loadUrl(java.lang.String)>
+<android.webkit.WebSyncManager: void <init>(android.content.Context,java.lang.String)>
+<android.webkit.SslErrorHandler: void cancel()>
+<android.webkit.WebView: void resumeTimers()>
+<android.widget.AbsListView: void setFilterText(java.lang.String)>
+<android.net.SSLCertificateSocketFactory: java.lang.String[] getSupportedCipherSuites()>
+<android.net.SSLCertificateSocketFactory: java.net.Socket createSocket(java.lang.String,int,java.net.InetAddress,int)>
+<android.util.Log: int wtf(java.lang.String,java.lang.Throwable)>
+<android.webkit.WebView: void <init>(android.content.Context)>
+<android.webkit.WebView: void loadUrl(java.lang.String,java.util.Map)>
+<android.webkit.WebView: void stopLoading()>
+<android.webkit.WebView: void goBackOrForward(int)>
+<android.webkit.WebView: void <init>(android.content.Context,android.util.AttributeSet,int)>
+<android.webkit.WebView: void clearCache(boolean)>
+<android.webkit.WebView: void loadData(java.lang.String,java.lang.String,java.lang.String)>
+<android.webkit.WebView: void <init>(android.content.Context,android.util.AttributeSet)>
+<android.util.EventLog: int getTagCode(java.lang.String)>
+<android.util.Log: int wtf(java.lang.String,java.lang.String)>
+<android.util.EventLog$Event: java.lang.Object getData()>
+<android.webkit.HttpAuthHandler: void proceed(java.lang.String,java.lang.String)>
+<android.webkit.WebView: void clearHistory()>
+<android.webkit.WebView: void invokeZoomPicker()>
+<android.widget.QuickContactBadge: void <init>(android.content.Context,android.util.AttributeSet,int)>
+<android.webkit.WebView: void setNetworkAvailable(boolean)>
+<android.net.SSLCertificateSocketFactory: java.lang.String[] getDefaultCipherSuites()>
+<android.util.EventLog: java.lang.String getTagName(int)>
+<android.webkit.WebView: void postUrl(java.lang.String,byte[])>
+<android.webkit.WebView: void clearSslPreferences()>
+<android.webkit.WebView: void addJavascriptInterface(java.lang.Object,java.lang.String)>
+<android.net.SSLCertificateSocketFactory: java.net.Socket createSocket(java.net.InetAddress,int,java.net.InetAddress,int)>
+<android.webkit.WebViewClient: void onReceivedSslError(android.webkit.WebView,android.webkit.SslErrorHandler,android.net.http.SslError)>
+<android.webkit.WebView: void requestFocusNodeHref(android.os.Message)>
+<android.webkit.CookieSyncManager: android.webkit.CookieSyncManager createInstance(android.content.Context)>
+<android.widget.MultiAutoCompleteTextView: void performFiltering(java.lang.CharSequence,int,int,int)>
+<android.widget.AbsListView: void onTextChanged(java.lang.CharSequence,int,int,int)>
+<android.os.Looper: void loop()>
+<android.webkit.WebViewDatabase: android.webkit.WebViewDatabase getInstance(android.content.Context)>
+<android.webkit.WebView: void debugDump()>
+Permission:android.permission.KILL_BACKGROUND_PROCESSES
+2 Callers:
+<android.app.ActivityManager: void restartPackage(java.lang.String)>
+<android.app.ActivityManager: void killBackgroundProcesses(java.lang.String)>
+Permission:android.permission.BLUETOOTH
+18 Callers:
+<android.media.AudioManager: void setMode(int)>
+<android.bluetooth.BluetoothAdapter: int getScanMode()>
+<android.bluetooth.BluetoothAdapter: boolean enable()>
+<android.bluetooth.BluetoothDevice: java.lang.String getName()>
+<android.media.AudioManager: void startBluetoothSco()>
+<android.bluetooth.BluetoothDevice: android.bluetooth.BluetoothClass getBluetoothClass()>
+<android.bluetooth.BluetoothDevice: int getBondState()>
+<android.bluetooth.BluetoothAdapter: java.lang.String getAddress()>
+<android.bluetooth.BluetoothAdapter: java.util.Set getBondedDevices()>
+<android.bluetooth.BluetoothAdapter: android.bluetooth.BluetoothServerSocket listenUsingRfcommWithServiceRecord(java.lang.String,java.util.UUID)>
+<android.bluetooth.BluetoothSocket: void connect()>
+<android.bluetooth.BluetoothAdapter: int getState()>
+<android.media.AudioManager: void stopBluetoothSco()>
+<android.bluetooth.BluetoothAdapter: boolean setName(java.lang.String)>
+<android.bluetooth.BluetoothDevice: android.bluetooth.BluetoothSocket createRfcommSocketToServiceRecord(java.util.UUID)>
+<android.bluetooth.BluetoothAdapter: boolean isDiscovering()>
+<android.bluetooth.BluetoothAdapter: boolean isEnabled()>
+<android.bluetooth.BluetoothAdapter: java.lang.String getName()>
+Permission:android.permission.RECORD_AUDIO
+8 Callers:
+<android.inputmethodservice.KeyboardView: void swipeRight()>
+<android.media.AudioRecord: void <init>(int,int,int,int,int)>
+<android.speech.SpeechRecognizer: void startListening(android.content.Intent)>
+<android.inputmethodservice.KeyboardView: void swipeDown()>
+<android.speech.SpeechRecognizer: void setRecognitionListener(android.speech.RecognitionListener)>
+<android.speech.SpeechRecognizer: void stopListening()>
+<android.speech.SpeechRecognizer: void cancel()>
+<android.media.MediaRecorder: void setAudioSource(int)>
