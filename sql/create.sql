@@ -157,6 +157,8 @@ CREATE TABLE PermissionInvocations
 
 alter table PermissionInvocations add primary key (InvocationId, Permission);
 
+CREATE INDEX IDX_PI_PERMISSION ON PermissionInvocations(Permission)
+
 
 
 
