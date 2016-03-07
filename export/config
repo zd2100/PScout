@@ -1,6 +1,6 @@
 {
 	driverClass: "com.mysql.jdbc.Driver",
-	connectionString: "jdbc:mysql://dl25.csl.toronto.edu/Pscout?user=pscoutclient&password=PScout123",
+	connectionString: "jdbc:mysql://<your url>",
 
 	threads : 10,
 	androidVersion: "4.3.1",
